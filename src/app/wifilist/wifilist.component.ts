@@ -32,6 +32,18 @@ export class WifilistComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    const list = [ ];
+    for (const item of this.list) {
+      if (item.isConnected) {
+        list.push(item);
+      }
+    }
+    for (const item of this.list) {
+      if (!item.isConnected) {
+        list.push(item);
+      }
+    }
+    this.list = list;
   }
 
   ngAfterViewInit() {
