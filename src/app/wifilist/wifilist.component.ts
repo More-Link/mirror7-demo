@@ -43,7 +43,9 @@ export class WifilistComponent implements OnInit, AfterViewInit {
         list.push(item);
       }
     }
-    this.list = list;
+    this.list = list.sort((a, b) => {
+      return b.power - a.power;
+    });
   }
 
   ngAfterViewInit() {
