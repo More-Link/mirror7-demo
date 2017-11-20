@@ -28,13 +28,13 @@ export class WeatherComponent implements OnInit {
     setInterval(() => {
       this.curDate = Date.now();
     }, 1000);
-    // if (this.selectItem) {
+    if (this.selectItem) {
       this.http.get('//weixin.jirengu.com/weather').subscribe((val) => {
         const remoteWeather = val.json().weather[0];
         this.remoteWeather = remoteWeather;
         this.remoteFutureWeather = remoteWeather.future.slice(1, 4);
       });
-    // }
+    }
   }
 
   getWeatherIconClass(val) {
