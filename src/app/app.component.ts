@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
   public wifiList = [ ];
   public wifiMode = false;
   public powerStatus = false;
+  private alpha = 10;
+  public alphaClass = `alpha-${this.alpha}`;
 
   ngOnInit() {
     for (let i = 0; i < 50; i++) {
@@ -33,5 +35,19 @@ export class AppComponent implements OnInit {
   }
   close() {
     this.powerStatus = false;
+  }
+  lightup() {
+    if (this.alpha >= 10) {
+      return;
+    }
+    this.alpha += 1;
+    this.alphaClass = `alpha-${Math.floor(this.alpha)}`;
+  }
+  lightdown() {
+    if (this.alpha <= 1) {
+      return;
+    }
+    this.alpha -= 1;
+    this.alphaClass = `alpha-${Math.floor(this.alpha)}`;
   }
 }

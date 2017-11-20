@@ -1,4 +1,4 @@
-<div *ngIf="powerStatus">
+<div *ngIf="powerStatus" [ngClass]="alphaClass">
   <app-wifilist [(selectItem)]="wifiContent" [list]="wifiList"
     (mode)="wiifChange($event)"
     *ngIf="wifiMode&&(!wifiContent||wifiContent.isConnected)"
@@ -9,6 +9,11 @@
   <app-weather [selectItem]="wifiContent" (mode)="wiifChange($event)"
     *ngIf="!wifiMode"
   ></app-weather>
+
+  <app-bottom-key class="abs bottom2 right iconfont icon-lightup"
+  (click)="lightup()"></app-bottom-key>
+  <app-bottom-key class="abs bottom1 right iconfont icon-lightdown"
+  (click)="lightdown()"></app-bottom-key>
   <app-bottom-key class="abs bottom right iconfont icon-close"
     (click)="close()"
   ></app-bottom-key>

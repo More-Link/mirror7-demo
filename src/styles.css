@@ -28,6 +28,14 @@ body {
   top: 715px;
 }
 
+.abs.bottom1 {
+  top: 630px;
+}
+
+.abs.bottom2 {
+  top: 545px;
+}
+
 .abs.left {
   left: 15px;
 }
@@ -38,4 +46,64 @@ body {
 
 .yellow {
   color: yellow;
+}
+/* .alpha-1 {
+  color: rgba(255, 255, 255, 0.1);
+}
+.alpha-2 {
+  color: rgba(255, 255, 255, 0.2);
+}
+.alpha-3 {
+  color: rgba(255, 255, 255, 0.3);
+}
+.alpha-4 {
+  color: rgba(255, 255, 255, 0.4);
+}
+.alpha-5 {
+  color: rgba(255, 255, 255, 0.5);
+}
+.alpha-6 {
+  color: rgba(255, 255, 255, 0.6);
+}
+.alpha-7 {
+  color: rgba(255, 255, 255, 0.7);
+}
+.alpha-8 {
+  color: rgba(255, 255, 255, 0.8);
+}
+.alpha-9 {
+  color: rgba(255, 255, 255, 0.9);
+}
+.alpha-10 {
+  color: rgba(255, 255, 255, 1);
+} */
+.alpha-1 * {
+  opacity: 0.42;
+}
+.alpha-2 * {
+  opacity: 0.45;
+}
+.alpha-3 * {
+  opacity: 0.5;
+}
+.alpha-4 * {
+  opacity: 0.56;
+}
+.alpha-5 * {
+  opacity: 0.63;
+}
+.alpha-6 * {
+  opacity: 0.69;
+}
+.alpha-7 * {
+  opacity: 0.76;
+}
+.alpha-8 * {
+  opacity: 0.83;
+}
+.alpha-9 * {
+  opacity: 0.9;
+}
+.alpha-10 * {
+  opacity: 1.0;
 }
