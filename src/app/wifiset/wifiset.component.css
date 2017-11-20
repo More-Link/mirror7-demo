@@ -1,5 +1,7 @@
 :host {
   font-size: 30px;
+  padding-top: 25px;
+  display: block;
 }
 
 .text-right {
@@ -26,7 +28,7 @@
 
 app-keyboard {
   position: absolute;
-  top: 355px;
+  top: 335px;
   width: 600px;
   display: block;
 }

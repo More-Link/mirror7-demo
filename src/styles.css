@@ -20,6 +20,10 @@ body {
   display: block;
 }
 
+.abs.top {
+  top: 15px;
+}
+
 .abs.bottom {
   top: 715px;
 }
@@ -30,4 +34,8 @@ body {
 
 .abs.right {
   left: 515px;
+}
+
+.yellow {
+  color: yellow;
 }

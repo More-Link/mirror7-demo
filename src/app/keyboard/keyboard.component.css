@@ -1,3 +1,7 @@
+:host {
+  padding-left: 30px;
+  padding-right: 30px;
+}
 .key-group {
   margin-bottom: 10px;
 }

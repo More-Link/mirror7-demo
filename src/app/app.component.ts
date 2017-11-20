@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   public wifiContent;
   public wifiList = [ ];
   public wifiMode = false;
+  public powerStatus = false;
 
   ngOnInit() {
     for (let i = 0; i < 50; i++) {
@@ -27,4 +28,10 @@ export class AppComponent implements OnInit {
   }
 
   wiifChange(val) { }
+  open() {
+    this.powerStatus = true;
+  }
+  close() {
+    this.powerStatus = false;
+  }
 }

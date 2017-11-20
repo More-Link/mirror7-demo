@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center" style="padding-top:25px;">
     <h1>WiFi List</h1>
 </div>
 <div class="list">
@@ -6,17 +6,16 @@
     <li *ngFor="let item of list; index as i" class="item" id="{{i}}"
       [ngClass]="{active: current===i}"
     >
-      <span class="col-xs-1">{{item.isConnected?'Y':''}}</span>
-      <span class="col-xs-8">{{item.ssid}}</span>
+      <span class="col-xs- iconfont icon-sure05" *ngIf="item.isConnected"></span>
+      <span class="col-xs-9" [ngClass]="{'col-xs-offset-1': !item.isConnected}">{{item.ssid}}</span>
       <span class="col-xs-1" *ngIf="item.connecting">{{item.connecting?'...':''}}</span>
-      <span class="col-xs-1 iconfont" *ngIf="!item.connecting"
-        [ngClass]="{'icon-lock': item.encryt}"
+      <span class="col-xs-1 iconfont icon-lock" *ngIf="item.encryt&&!item.connecting"
       ></span>
-      <span class="col-xs-2">{{item.power}}</span>
+      <span class="col-xs-1 iconfont" [ngClass]="{'icon-signal1': item.power<20, 'icon-signal2': item.power>=20&&item.power<40, 'icon-signal3': item.power>=40&&item.power<60, 'icon-signal4': item.power>=60&&item.power<80, 'icon-signal5': item.power>=80, 'col-xs-offset-1': !item.encryt&&!item.connecting}"></span>
     </li>
   </ul>
 </div>
 <app-control-ten
   [keyUp]="keyUp" [keyDown]="keyDown" [keyEnter]="keyEnter"
 ></app-control-ten>
-<app-bottom-key class="abs bottom left border" [text]="'后退'" (click)="back()"></app-bottom-key>
+<app-bottom-key class="abs top right iconfont icon-back" (click)="back()"></app-bottom-key>
