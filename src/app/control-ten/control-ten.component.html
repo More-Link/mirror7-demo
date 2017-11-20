@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="key col-xs-4 col-xs-offset-8 col-xs-pull-4"
+  (click)="doKeyUp()" [ngClass]="{border: _keyUp}"
+  >{{_keyUp?'上':''}}</div>
+  <div class="key col-xs-4"
+  (click)="doKeyLeft()" [ngClass]="{border: _keyLeft}"
+  >{{_keyLeft?'左':''}}</div>
+  <div class="key col-xs-4"
+  (click)="doKeyEnter()" [ngClass]="{border: _keyEnter}"
+  >{{_keyEnter?'O':''}}</div>
+  <div class="key col-xs-4"
+  (click)="doKeyRight()" [ngClass]="{border: _keyRight}"
+  >{{_keyRight?'右':''}}</div>
+  <div class="key col-xs-4 col-xs-push-4"
+  (click)="doKeyDown()" [ngClass]="{border: _keyDown}"
+  >{{_keyDown?'下':''}}</div>
+</div>

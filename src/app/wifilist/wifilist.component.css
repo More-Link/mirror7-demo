@@ -1,0 +1,41 @@
+:host {
+  margin-top: -20px;
+  display: block;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.list {
+  margin-right: 35px;
+  margin-left: 35px;
+  margin-bottom: 20px;
+  height: 500px;
+  border: 1px solid #efefef;
+  overflow-y: scroll;
+}
+
+ul {
+  padding: 0;
+}
+
+.row {
+  margin: 0;
+}
+
+.item {
+  height: 70px;
+  font-size: 30px;
+  line-height: 70px;
+  list-style-type: none;
+}
+
+.item.active {
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+
+.item > * {
+  overflow: hidden;
+}

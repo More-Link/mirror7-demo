@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+}
+
+.border {
+  border: 1px solid #efefef;
+}
+
+.bottom-border {
+  border-bottom: 1px solid #efefef;
+}
+
+.no-border {
+  border-width: 0;
+}
+
+.abs {
+  position: absolute;
+  display: block;
+}
+
+.abs.bottom {
+  top: 715px;
+}
+
+.abs.left {
+  left: 15px;
+}
+
+.abs.right {
+  left: 515px;
+}

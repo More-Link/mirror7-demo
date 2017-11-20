@@ -1,0 +1,22 @@
+<div class="text-center">
+    <h1>WiFi List</h1>
+</div>
+<div class="list">
+  <ul class="row">
+    <li *ngFor="let item of list; index as i" class="item" id="{{i}}"
+      [ngClass]="{active: current===i}"
+    >
+      <span class="col-xs-1">{{item.isConnected?'Y':''}}</span>
+      <span class="col-xs-8">{{item.ssid}}</span>
+      <span class="col-xs-1" *ngIf="item.connecting">{{item.connecting?'...':''}}</span>
+      <span class="col-xs-1 iconfont" *ngIf="!item.connecting"
+        [ngClass]="{'icon-lock': item.encryt}"
+      ></span>
+      <span class="col-xs-2">{{item.power}}</span>
+    </li>
+  </ul>
+</div>
+<app-control-ten
+  [keyUp]="keyUp" [keyDown]="keyDown" [keyEnter]="keyEnter"
+></app-control-ten>
+<app-bottom-key class="abs bottom left border" [text]="'后退'" (click)="back()"></app-bottom-key>

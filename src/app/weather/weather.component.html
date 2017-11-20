@@ -1,0 +1,49 @@
+<!-- <div *ngIf="disMode===0">
+  <p class="cur weather iconfont icon-weather">{{curWeather}}</p>
+  <p class="cur temp">{{curTemp}}℃</p>
+</div>
+<div *ngIf="disMode===1">
+  <p class="cur time">{{curTime}}</p>
+  <p class="cur date">{{curDate}}</p>
+</div> -->
+<div class="cur info">
+  <p *ngIf="remoteWeather">
+    {{remoteWeather.future[0].date}} {{remoteWeather.future[0].day}}
+  </p>
+  <p *ngIf="!remoteWeather">{{curDate | date:'yyyy-MM-dd'}}</p>
+  <p class="time">{{curDate | date:'HH:mm:ss'}}</p>
+</div>
+<div class="row" style="padding: 0 35px;padding-top:170px;">
+  <div class="col-xs-12" style="font-size: 18px;margin-bottom: -25px;">
+    室内温度
+  </div>
+  <div class="col-xs-6 cur temp">{{curTemp}}℃</div>
+  <div class="col-xs-6 cur city" *ngIf="remoteWeather">
+    <p>{{remoteWeather.city_name}}</p>
+    <p style="font-size:30px;">{{remoteWeather.last_update | date:'HH:mm'}} 发布</p>
+  </div>
+</div>
+<div class="cur weather" *ngIf="remoteWeather" style="padding: 0 35px;">
+  <i class="iconfont icon"
+    [ngClass]="getWeatherIconClass(remoteWeather.now.text)"
+  ></i>
+  <span>{{remoteWeather.now.text}} {{remoteWeather.future[0].low}}~{{remoteWeather.future[0].high}}℃</span>
+</div>
+<hr *ngIf="remoteWeather">
+<div class="row future" *ngIf="remoteWeather" style="padding: 0 35px;">
+  <div class="col-xs-4" *ngFor="let f of remoteWeather.future.slice(1, 4)">
+    <p class="text-center">{{f.day}}</p>
+    <div class="col-xs-6 iconfont icon"
+      [ngClass]="getWeatherIconClass(f.text.split('/')[0])">
+    </div>
+    <div class="col-xs-6 text-right">
+      <p class="low">{{f.low}}℃</p>
+      <p class="high">{{f.high}}℃</p>
+    </div>
+    <p class="col-xs-12 text-center">{{f.text.split('/')[0]}}</p>
+  </div>
+</div>
+<app-bottom-key class="abs bottom left iconfont icon-wifi"
+  (click)="wifi()"
+></app-bottom-key>
+

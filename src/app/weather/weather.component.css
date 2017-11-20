@@ -1,0 +1,62 @@
+/* .cur {
+  padding-right: 50px;
+  text-align: right;
+  font-size: 150px;
+}
+
+.cur.weather {
+  padding-top: 70px;
+  font-size: 170px;
+}
+
+.cur.time {
+  padding-top: 70px;
+}
+
+.cur.date {
+  font-size: 120px;
+} */
+
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+.cur.info {
+  padding-top: 20px;
+  padding-left: 60px;
+  font-size: 65px;
+}
+
+.cur.info .time {
+  font-size: 60px;
+  margin-top: -23px;
+}
+
+.cur.temp {
+  font-size: 120px;
+}
+
+.cur.city {
+  text-align: right;
+  font-size: 40px;
+}
+
+.cur.weather {
+  font-size: 20px;
+}
+
+.cur.weather .icon {
+  font-size: 30px;
+}
+
+.future .icon {
+  font-size: 45px;
+}
+
+.future .low, .future.high {
+  margin: 0;
+  line-height: 30px;
+}

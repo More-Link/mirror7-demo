@@ -1,0 +1,23 @@
+.key-group {
+  margin-bottom: 10px;
+}
+
+.key {
+  padding: 0;
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+}
+
+.key.no-border {
+  border-width: 0;
+}
+
+.key.shorter {
+  font-size: 20px;
+}
+
+.key.active {
+  color: black;
+  background-color: white;
+}

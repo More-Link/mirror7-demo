@@ -1,0 +1,16 @@
+<div>
+  <div class="key-group row" *ngFor="let group of keywords; index as j"
+  >
+    <div class="col-xs-1"></div>
+    <div class="key col-xs-1 bottom-border"
+      *ngFor="let word of group; index as i"
+      [ngClass]="{'col-xs-1': word!=='space'&&word!==actionBtnText, 'col-xs-6': word==='space'&&-1!==group.indexOf(actionBtnText), 'col-xs-8': word==='space'&&-1===group.indexOf(actionBtnText), 'col-xs-2': word===actionBtnText, 'shorter':word!=='space'&&word.length>1, 'no-border': word.length===0, 'active': i===x&&j===y}"
+    >
+      {{word==='delete'?'←':word}}
+    </div>
+  </div>
+</div>
+<app-control-ten
+  [keyUp]="keyUp" [keyDown]="keyDown" [keyLeft]="keyLeft" [keyRight]="keyRight"
+  [keyEnter]="keyEnter"
+></app-control-ten>
