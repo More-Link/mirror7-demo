@@ -6,7 +6,8 @@
   <p class="cur time">{{curTime}}</p>
   <p class="cur date">{{curDate}}</p>
 </div> -->
-<div class="cur info">
+<!-- 20:59 -->
+<!-- <div class="cur info">
   <p *ngIf="remoteWeather">
     {{remoteWeather.future[0].date}} {{remoteWeather.future[0].day}}
   </p>
@@ -46,4 +47,43 @@
 <app-bottom-key class="abs bottom left iconfont icon-wifi"
   (click)="wifi()"
 ></app-bottom-key>
-
+ -->
+<div style="padding: 0 70px;">
+  <div class="row info" style="padding-top:70px;">
+    <div class="col-xs-6 text-center">
+      <p *ngIf="remoteWeather">{{remoteWeather.future[0].date}}</p>
+      <p *ngIf="remoteWeather">{{remoteWeather.future[0].day}}</p>
+      <p *ngIf="!remoteWeather">{{curDate | date:'yyyy-MM-dd'}}</p>
+      <p *ngIf="!remoteWeather">{{curDate | date:'EEE'}}</p>
+      <p *ngIf="remoteWeather">{{remoteWeather.future[0].low}}~{{remoteWeather.future[0].high}}℃</p>
+    </div>
+    <div class="col-xs-6" *ngIf="remoteWeather">
+      <img src="//weixin.jirengu.com/images/weather/code/{{remoteWeather.now.code}}.png" alt="">
+    </div>
+  </div>
+  <hr>
+  <div class="row future" *ngIf="remoteWeather" style="padding: 0;">
+    <div class="col-xs-4" *ngFor="let f of remoteWeather.future.slice(1, 4)">
+      <p class="text-center">{{f.day}}</p>
+      <div class="col-xs-12 text-center">
+        <span class="low">{{f.low}}℃</span>~<span class="high">{{f.high}}℃</span>
+      </div>
+      <div class="col-xs-10 col-xs-offset-1" style="padding-top:10px;">
+        <img src="//weixin.jirengu.com/images/weather/code/{{f.code1}}.png" alt="" style="width: 100%;">
+      </div>
+      <div class="col-xs-12 text-center">
+        <span class="">{{f.text.split('/')[0]}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="cur" style="padding-top:45px;">
+      <p class="text-center">
+        {{curDate | date:'HH:mm'}} <span style="font-size:35px;">{{curDate | date:'a'}}</span>
+      </p>
+      <p class="text-center">
+        <span style="font-size:35px;">室内温度</span> {{curTemp}}℃</p>
+  </div>
+</div>
+<app-bottom-key class="abs bottom left iconfont icon-wifi"
+(click)="wifi()"
+></app-bottom-key>
