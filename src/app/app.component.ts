@@ -16,6 +16,18 @@ export class AppComponent implements OnInit {
   public alphaClass = `alpha-${this.alpha}`;
 
   ngOnInit() {
+    this.wifiList.push({
+      ssid: '台山市捷达电器有限公司',
+      isConnected: false,
+      power: 100,
+      encryt: true
+    });
+    this.wifiList.push({
+      ssid: 'More-Link Technology',
+      isConnected: false,
+      power: 99,
+      encryt: true
+    });
     for (let i = 0; i < 50; i++) {
       this.wifiList.push({
         ssid: faker.name.findName(),

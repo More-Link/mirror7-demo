@@ -28,4 +28,8 @@ import { BottomKeyComponent } from './bottom-key/bottom-key.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    console.log('Copyright 2017 More-link');
+  }
+}
