@@ -6,7 +6,7 @@
     <li *ngFor="let item of list; index as i" class="item" id="{{i}}"
       [ngClass]="{active: current===i}"
     >
-      <span class="col-xs- iconfont icon-sure05" *ngIf="item.isConnected"></span>
+      <span class="col-xs-1 iconfont icon-sure05" *ngIf="item.isConnected"></span>
       <span class="col-xs-9" [ngClass]="{'col-xs-offset-1': !item.isConnected}">{{item.ssid}}</span>
       <span class="col-xs-1" *ngIf="item.connecting">{{item.connecting?'...':''}}</span>
       <span class="col-xs-1 iconfont icon-lock" *ngIf="item.encryt&&!item.connecting"

@@ -1,16 +1,20 @@
-<app-wifilist [(selectItem)]="wifiContent" [list]="wifiList"
-  (mode)="wiifChange($event)"
-  *ngIf="powerStatus&&wifiMode&&!wifiContent"
-></app-wifilist>
-<app-wifiset [(selectItem)]="wifiContent" (mode)="wiifChange($event)"
-  *ngIf="powerStatus&&wifiMode&&wifiContent&&!wifiContent.isConnected"
-></app-wifiset>
-<app-weather [selectItem]="wifiContent" (mode)="wiifChange($event)"
-  *ngIf="powerStatus&&!wifiMode"
-></app-weather>
-<app-bottom-key class="abs bottom right iconfont icon-close"
-  *ngIf="powerStatus" (click)="close()"
-></app-bottom-key>
-<app-bottom-key class="abs bottom right iconfont icon-open"
-  *ngIf="!powerStatus" (click)="open()"
-></app-bottom-key>
+<div *ngIf="powerStatus">
+  <app-wifilist [(selectItem)]="wifiContent" [list]="wifiList"
+    (mode)="wiifChange($event)"
+    *ngIf="wifiMode&&(!wifiContent||wifiContent.isConnected)"
+  ></app-wifilist>
+  <app-wifiset [(selectItem)]="wifiContent" (mode)="wiifChange($event)"
+    *ngIf="wifiMode&&wifiContent&&!wifiContent.isConnected"
+  ></app-wifiset>
+  <app-weather [selectItem]="wifiContent" (mode)="wiifChange($event)"
+    *ngIf="!wifiMode"
+  ></app-weather>
+  <app-bottom-key class="abs bottom right iconfont icon-close"
+    (click)="close()"
+  ></app-bottom-key>
+</div>
+<div *ngIf="!powerStatus">
+  <app-bottom-key class="abs bottom right iconfont icon-open"
+    (click)="open()"
+  ></app-bottom-key>
+</div>
