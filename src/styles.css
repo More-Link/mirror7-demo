@@ -48,36 +48,6 @@ body {
 .yellow {
   color: yellow;
 }
-/* .alpha-1 {
-  color: rgba(255, 255, 255, 0.1);
-}
-.alpha-2 {
-  color: rgba(255, 255, 255, 0.2);
-}
-.alpha-3 {
-  color: rgba(255, 255, 255, 0.3);
-}
-.alpha-4 {
-  color: rgba(255, 255, 255, 0.4);
-}
-.alpha-5 {
-  color: rgba(255, 255, 255, 0.5);
-}
-.alpha-6 {
-  color: rgba(255, 255, 255, 0.6);
-}
-.alpha-7 {
-  color: rgba(255, 255, 255, 0.7);
-}
-.alpha-8 {
-  color: rgba(255, 255, 255, 0.8);
-}
-.alpha-9 {
-  color: rgba(255, 255, 255, 0.9);
-}
-.alpha-10 {
-  color: rgba(255, 255, 255, 1);
-} */
 .alpha-1 * {
   opacity: 0.42;
 }
@@ -107,4 +77,8 @@ body {
 }
 .alpha-10 * {
   opacity: 1.0;
+}
+
+.alpha-1 .alpha-protect, .alpha-2 .alpha-protect, .alpha-3 .alpha-protect, .alpha-4 .alpha-protect, .alpha-5 .alpha-protect, .alpha-1.alpha-protect, .alpha-2.alpha-protect, .alpha-3.alpha-protect, .alpha-4.alpha-protect, .alpha-5.alpha-protect, .alpha-1 .alpha-protect *, .alpha-2 .alpha-protect *, .alpha-3 .alpha-protect *, .alpha-4 .alpha-protect *, .alpha-5 .alpha-protect *, .alpha-1.alpha-protect *, .alpha-2.alpha-protect *, .alpha-3.alpha-protect *, .alpha-4.alpha-protect *, .alpha-5.alpha-protect * {
+  opacity: 0.69;
 }

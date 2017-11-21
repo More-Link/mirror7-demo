@@ -14,12 +14,12 @@
     (lightclass)="lightchange($event)"
   ></app-lightbar>
 
-  <app-bottom-key class="abs bottom right iconfont icon-close"
+  <app-bottom-key class="abs bottom right iconfont icon-close alpha-protect"
     (click)="close()"
   ></app-bottom-key>
 </div>
-<div *ngIf="!powerStatus">
-  <app-bottom-key class="abs bottom right iconfont icon-open"
+<div *ngIf="!powerStatus" [ngClass]="alphaClass">
+  <app-bottom-key class="abs bottom right iconfont icon-open alpha-protect"
     (click)="open()"
   ></app-bottom-key>
 </div>
