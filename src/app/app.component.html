@@ -10,10 +10,10 @@
     *ngIf="!wifiMode"
   ></app-weather>
 
-  <app-bottom-key class="abs bottom2 right iconfont icon-lightup"
-  (click)="lightup()"></app-bottom-key>
-  <app-bottom-key class="abs bottom1 right iconfont icon-lightdown"
-  (click)="lightdown()"></app-bottom-key>
+  <app-lightbar class="abs bottom2 right" style="width:70px;"
+    (lightclass)="lightchange($event)"
+  ></app-lightbar>
+
   <app-bottom-key class="abs bottom right iconfont icon-close"
     (click)="close()"
   ></app-bottom-key>

@@ -9,6 +9,7 @@ import { ControlTenComponent } from './control-ten/control-ten.component';
 import { WeatherComponent } from './weather/weather.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
 import { BottomKeyComponent } from './bottom-key/bottom-key.component';
+import { LightbarComponent } from './lightbar/lightbar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BottomKeyComponent } from './bottom-key/bottom-key.component';
     ControlTenComponent,
     WeatherComponent,
     KeyboardComponent,
-    BottomKeyComponent
+    BottomKeyComponent,
+    LightbarComponent
   ],
   imports: [
     BrowserModule,
