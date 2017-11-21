@@ -18,7 +18,11 @@ export class WifilistComponent implements OnInit, AfterViewInit {
     const doc = document.getElementById(this.current + '');
     const listDoc = doc.parentElement.parentElement;
     const y = this.current <= 3 ? 0 : (this.current - 3) * 70;
-    listDoc.scrollTo(0, y);
+    if (!listDoc.scrollTo) {
+      window.location.hash = `#${this.current - 3}`;
+    } else {
+      listDoc.scrollTo(0, y);
+    }
   }
 
   constructor() { }
