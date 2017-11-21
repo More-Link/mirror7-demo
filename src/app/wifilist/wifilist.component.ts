@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 
+declare const $: any;
+
 @Component({
   selector: 'app-wifilist',
   templateUrl: './wifilist.component.html',
@@ -18,11 +20,9 @@ export class WifilistComponent implements OnInit, AfterViewInit {
     const doc = document.getElementById(this.current + '');
     const listDoc = doc.parentElement.parentElement;
     const y = this.current <= 3 ? 0 : (this.current - 3) * 70;
-    if (!listDoc.scrollTo) {
-      window.location.hash = `#${this.current - 3}`;
-    } else {
-      listDoc.scrollTo(0, y);
-    }
+    // listDoc.scrollTo(0, y);
+    $(listDoc).scrollTo($(`#${this.current - 3}`), 300);
+    // $(`#${this.current - 3}`).scroll();
   }
 
   constructor() { }
