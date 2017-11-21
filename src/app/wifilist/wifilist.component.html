@@ -1,4 +1,4 @@
-<div class="text-center" style="padding-top:25px;">
+<div class="text-center" style="padding-top:10px;">
     <h1>WiFi List</h1>
 </div>
 <div class="list">
@@ -15,7 +15,9 @@
     </li>
   </ul>
 </div>
-<app-control-ten
-  [keyUp]="keyUp" [keyDown]="keyDown" [keyEnter]="keyEnter"
-></app-control-ten>
+<div style="padding-left:15px;padding-right:70px">
+  <app-control-ten
+    [keyUp]="keyUp" [keyDown]="keyDown" [keyEnter]="keyEnter"
+  ></app-control-ten>
+</div>
 <app-bottom-key class="abs top right iconfont icon-back" (click)="back()"></app-bottom-key>

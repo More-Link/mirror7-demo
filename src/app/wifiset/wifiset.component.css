@@ -1,7 +1,7 @@
 :host {
   font-size: 26px;
   padding-top: 25px;
-  padding-right: 75px;
+  padding-right: 65px;
   display: block;
 }
 
@@ -29,7 +29,8 @@
 
 app-keyboard {
   position: absolute;
-  top: 335px;
+  /* top: 340px; */
+  top: 339px;
   width: 600px;
   display: block;
 }
