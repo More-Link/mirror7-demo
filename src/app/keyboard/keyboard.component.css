@@ -11,6 +11,8 @@
   text-align: center;
   height: 45px;
   line-height: 45px;
+  border-left:1px solid white;
+  border-right:1px solid white;
 }
 
 .key.no-border {

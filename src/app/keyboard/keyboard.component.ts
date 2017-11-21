@@ -18,21 +18,45 @@ export class KeyboardComponent implements OnInit {
   private lowerWords = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'delete'],
-    ['', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '', ''],
-    ['ABC', '&123', 'space']
+    ['Upper', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '&123'],
+    ['deleteAll', 'space']
   ];
   private upperWords = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'delete'],
-    ['', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '', ''],
-    ['abc', '&123', 'space']
+    ['abc', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '&123'],
+    ['deleteAll', 'space']
   ];
   private numberWords = [
     '1234567890'.split(''),
-    '-/:;()¥&@"'.split(''),
-    ['', ''].concat('.,?!\''.split('')).concat(['', '', 'delete']),
-    ['ABC', 'abc', 'space']
+    '-_\/:;()¥&@'.split(''),
+    ['Lower'].concat('.,?!\'"'.split('')).concat(['←']),
+    ['deleteAll', 'space']
   ];
+
+  is1Site(word) {
+    const ignoreList = [
+      'space',
+      this.actionBtnText, 'deleteAll', 'Lower', '&123', '←'
+    ];
+    return -1 === ignoreList.indexOf(word);
+  }
+  is2Site(word) {
+    const targetList = [
+      this.actionBtnText, 'deleteAll', 'Lower', '&123', '←'
+    ];
+    return -1 !== targetList.indexOf(word);
+  }
+  getWord(val) {
+    switch (val) {
+      case 'delete': return '←';
+      case 'deleteAll': return '清空';
+      case 'space': return '';
+      case 'Upper': return '';
+      case 'Lower': return 'abc';
+      default: return val;
+    }
+  }
 
   constructor() { }
 
@@ -83,11 +107,13 @@ export class KeyboardComponent implements OnInit {
       }
       this.x++;
     };
-    this.keyEnter = () => {
-      const word = this.keywords[this.y][this.x];
+    this.keyEnter = (word = this.keywords[this.y][this.x]) => {
       switch (word) {
         case 'space':
           this._words += ' '; break;
+        case '←':
+          this.keyEnter('delete');
+          break;
         case 'delete':
           if (this._words.length === 0) {
             break;
@@ -102,11 +128,21 @@ export class KeyboardComponent implements OnInit {
         case 'ABC':
           this.keywords = this.upperWords;
           break;
+        case 'Upper':
+          this.keyEnter('ABC');
+          break;
         case 'abc':
           this.keywords = this.lowerWords;
           break;
+        case 'Lower':
+        this.keyEnter('abc');
+          break;
         case '&123':
           this.keywords = this.numberWords;
+          fixX();
+          break;
+        case 'deleteAll':
+          this._words = '';
           break;
         default:
           this._words += word; break;
@@ -118,6 +154,6 @@ export class KeyboardComponent implements OnInit {
   keyDown() { }
   keyLeft() { }
   keyRight() { }
-  keyEnter() { }
+  keyEnter(val?) { }
 
 }
