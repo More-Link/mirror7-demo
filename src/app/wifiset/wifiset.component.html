@@ -1,14 +1,15 @@
 <div class="row">
-  <div class="col-xs-3 col-xs-offset-1 text-right">SSID: </div>
+  <div class="col-xs-4 text-right">无线名称: </div>
   <div class="col-xs-7">{{selectItem.ssid}}</div>
-</div>
-<div class="row">
-  <div class="col-xs-3 col-xs-offset-1 text-right">Password: </div>
+  <div class="col-xs-4 text-right">无线密码: </div>
   <div class="col-xs-7 password bottom-border">{{words}}</div>
+  <div class="col-xs-12 text-center" *ngIf="isConnecting"
+    style="font-size: 18px;"
+  >正在连接中...</div>
 </div>
-<app-keyboard (words)="getWords($event)"
+<app-keyboard (words)="getWords($event)" *ngIf="!isConnecting"
   [actionBtnText]="'连接'" [actionBtnFn]="connect"
 ></app-keyboard>
-<app-bottom-key class="abs top right iconfont icon-back"
+<app-bottom-key class="abs top right iconfont icon-back" *ngIf="!isConnecting"
   (click)="back()"
 ></app-bottom-key>

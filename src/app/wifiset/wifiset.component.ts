@@ -27,6 +27,7 @@ export class WifisetComponent implements OnInit {
       }
       this.isConnecting = true;
       setTimeout(() => {
+        this.isConnecting = false;
         this.selectItem.isConnected = true;
         this.selectItemChange.emit(this.selectItem);
         this.mode.emit(false);

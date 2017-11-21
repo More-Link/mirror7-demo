@@ -67,24 +67,23 @@ export class WifilistComponent implements OnInit, AfterViewInit {
         return;
       }
       const selectItem = this.list[this.current];
+      this.selectItem = selectItem;
       if (selectItem.isConnected) {
         return;
       }
+      for (const index of Object.keys(this.list)) {
+        this.list[index].isConnected = false;
+      }
       this.selectItemChange.emit(null);
       if (!selectItem.encryt) {
-        for (const index of Object.keys(this.list)) {
-          this.list[index].isConnected = false;
-          if (+index === this.current) {
-            connecting = true;
-            this.list[index].connecting = true;
-            setTimeout(() => {
-              this.list[index].connecting = false;
-              this.list[index].isConnected = true;
-              this.selectItemChange.emit(this.list[index]);
-              this.back();
-            }, 3000);
-          }
-        }
+        connecting = true;
+        this.list[this.current].connecting = true;
+        setTimeout(() => {
+          this.list[this.current].connecting = false;
+          this.list[this.current].isConnected = true;
+          this.selectItemChange.emit(this.list[this.current]);
+          this.back();
+        }, 3000);
       } else {
         this.selectItemChange.emit(selectItem);
       }
