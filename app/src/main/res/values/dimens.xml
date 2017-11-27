@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="root_padding">15dp</dimen>
+
+    <dimen name="control_fontsize">40sp</dimen>
+
+    <dimen name="weather_fontsize">35sp</dimen>
+    <dimen name="weather_fontsize_big">60sp</dimen>
+    <dimen name="weather_feature_fontsize">16sp</dimen>
+
+    <dimen name="action_btn_width">70dp</dimen>
+    <dimen name="action_btn_height">70dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
