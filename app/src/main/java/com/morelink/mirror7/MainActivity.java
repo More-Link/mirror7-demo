@@ -11,11 +11,11 @@ public class MainActivity extends BaseActivity {
 
         setContentView(R.layout.activity_main);
 
-//        Common.getIn().goActivity(this, WirelessActivity.class);
+//        Common.getInstance().goActivity(this, WirelessActivity.class);
     }
 
     public void actionOpen(View view) {
-        Common.getIn().goActivity(this);
+        Common.getInstance().goActivity(this);
     }
 
 }

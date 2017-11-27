@@ -2,8 +2,19 @@ package com.morelink.mirror7;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by Arylo on 27/11/17.
@@ -13,7 +24,7 @@ public class Common {
 
     private static Common common = null;;
 
-    public static synchronized Common getIn() {
+    public static synchronized Common getInstance() {
         if (common == null) {
 
             common = new Common();
@@ -43,5 +54,70 @@ public class Common {
         }
     }
 
+    public String get(String path) throws Exception {
+        String response = null;
+        try {
+            URL url = new URL(path);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(5000);
+            // read the response
+            InputStream in = new BufferedInputStream(conn.getInputStream());
+            response = convertStreamToString(in);
+        } catch (Exception e) {
+            Log.e(WeatherActivity.class.getSimpleName(), "Exception: " + e.getMessage());
+        } finally {
+            return response;
+        }
+    }
 
+    private String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sb.toString();
+    }
+
+    public Bitmap getHttpBitmap(String url){
+        URL myFileURL;
+        Bitmap bitmap=null;
+        try{
+            myFileURL = new URL(url);
+            //获得连接
+            HttpURLConnection conn=(HttpURLConnection)myFileURL.openConnection();
+            //设置超时时间为6000毫秒，conn.setConnectionTiem(0);表示没有时间限制
+            conn.setConnectTimeout(6000);
+            //连接设置获得数据流
+            conn.setDoInput(true);
+            //不使用缓存
+            conn.setUseCaches(false);
+            //这句可有可无，没有影响
+            //conn.connect();
+            //得到数据流
+            InputStream is = conn.getInputStream();
+            //解析得到图片
+            bitmap = BitmapFactory.decodeStream(is);
+            //关闭数据流
+            is.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return bitmap;
+
+    }
 }

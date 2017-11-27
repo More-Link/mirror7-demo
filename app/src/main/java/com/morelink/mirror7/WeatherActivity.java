@@ -4,25 +4,75 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class WeatherActivity extends BaseActivity {
 
+    private String WEATHER_API_URL = "http://weixin.jirengu.com/weather";
+    private TextView vCurDate;
+    private TextView vCurWeek;
+    private TextView vFea1Week;
+    private TextView vFea2Week;
+    private TextView vFea3Week;
+    private TextView vCurTemp;
+    private TextView vFea1Temp;
+    private TextView vFea2Temp;
+    private TextView vFea3Temp;
+    private TextView vFea1Weather;
+    private TextView vFea2Weather;
+    private TextView vFea3Weather;
+    private ImageView vCurWeatherImage;
+    private ImageView vFea1WeatherImage;
+    private ImageView vFea2WeatherImage;
+    private ImageView vFea3WeatherImage;
+    private TextView vCurTime;
+    private TextView vCurTimeHalf;
+    private TextView vCurRoomTemp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectDiskReads().detectDiskWrites().detectNetwork()
+                .penaltyLog().build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
+                .penaltyLog().penaltyDeath().build());
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_weather);
 
+        this.vCurDate = this.findViewById(R.id.cur_date);
+        this.vCurWeek = this.findViewById(R.id.cur_week);
+        this.vFea1Week = this.findViewById(R.id.fea_1_week);
+        this.vFea2Week = this.findViewById(R.id.fea_2_week);
+        this.vFea3Week = this.findViewById(R.id.fea_3_week);
+        this.vCurTemp = this.findViewById(R.id.cur_temp);
+        this.vFea1Temp = this.findViewById(R.id.fea_1_temp);
+        this.vFea2Temp = this.findViewById(R.id.fea_2_temp);
+        this.vFea3Temp = this.findViewById(R.id.fea_3_temp);
+        this.vFea1Weather = this.findViewById(R.id.fea_1_weather);
+        this.vFea2Weather = this.findViewById(R.id.fea_2_weather);
+        this.vFea3Weather = this.findViewById(R.id.fea_3_weather);
+        this.vCurWeatherImage = this.findViewById(R.id.cur_weather_image);
+        this.vFea1WeatherImage = this.findViewById(R.id.fea_1_weather_image);
+        this.vFea2WeatherImage = this.findViewById(R.id.fea_2_weather_image);
+        this.vFea3WeatherImage = this.findViewById(R.id.fea_3_weather_image);
+
+        this.vCurTime = this.findViewById(R.id.cur_time);
+        this.vCurTimeHalf = this.findViewById(R.id.cur_time_half);
+        this.vCurRoomTemp = this.findViewById(R.id.cur_room_temp);
     }
 
     @Override
@@ -37,73 +87,127 @@ public class WeatherActivity extends BaseActivity {
         if (isConnected) {
             this.injectRemoteData();
         }
+        String hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "";
+        if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 10) {
+            hour = "0" + hour;
+        }
+        String min = Calendar.getInstance().get(Calendar.MINUTE) + "";
+        if (Calendar.getInstance().get(Calendar.MINUTE) < 10) {
+            min = "0" + min;
+        }
+        this.vCurTime.setText(hour + ":" + min);
+        this.vCurTimeHalf.setText(
+                Calendar.getInstance().get(Calendar.AM_PM) == 0 ? "AM" : "PM"
+        );
+        // TODO Room Temp
     }
 
     public void actionWireless(View view) {
-        Common.getIn().goActivity(this, WirelessActivity.class);
+        Common.getInstance().goActivity(this, WirelessActivity.class);
     }
 
-    private void injectRemoteData() {
-        this.getRemoteData();
-    }
-
-    private boolean getRemoteData() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url = "http://weixin.jirengu.com/weather";
-                debug("Start");
-                try {
-                    debug(get(url));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-        return false;
-    }
-    public void debug(String text) {
-        Log.d(this.getClass().getSimpleName(), text);
-//        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
-    private String get(String path) throws Exception {
-        String response = null;
-        Log.d(this.getClass().getSimpleName(), "url " + path);
-        try {
-            URL url = new URL(path);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setConnectTimeout(5000);
-            // read the response
-            InputStream in = new BufferedInputStream(conn.getInputStream());
-            Log.d(this.getClass().getSimpleName(), "start convert");
-            response = convertStreamToString(in);
-        } catch (Exception e) {
-            Log.e(WeatherActivity.class.getSimpleName(), "Exception: " + e.getMessage());
-        } finally {
-            return response;
-        }
-    }
-    private String convertStreamToString(InputStream is) {
-        Log.d(this.getClass().getSimpleName(), "have convert");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line).append('\n');
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // Current Date
             try {
-                is.close();
-            } catch (IOException e) {
+                JSONObject curObj = resource.getJSONArray("future").getJSONObject(0);
+                vCurDate.setText(curObj.getString("date"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // Weeks
+            TextView[] tvsWeek = { vCurWeek, vFea1Week, vFea2Week, vFea3Week };
+            try {
+                for (int i = 0; i < tvsWeek.length; i++) {
+                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i);
+                    tvsWeek[i].setText(obj.getString("day"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // Temps
+            TextView[] tvsTemp = { vCurTemp, vFea1Temp, vFea2Temp, vFea3Temp };
+            try {
+                for (int i = 0; i < tvsTemp.length; i++) {
+                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i);
+                    String str = obj.getString("low") + "~" + obj.getString("high") + "℃";
+                    tvsTemp[i].setText(str);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // Weather
+            TextView[] tvsWeather = { vFea1Weather, vFea2Weather, vFea3Weather };
+            try {
+                for (int i = 0; i < tvsWeather.length; i++) {
+                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i + 1);
+                    String str = obj.getString("text").replaceAll("\\/.+", "");
+                    tvsWeather[i].setText(str);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            ImageView[] ivWeather = { vCurWeatherImage, vFea1WeatherImage, vFea2WeatherImage, vFea3WeatherImage };
+            try {
+                for (int i = 0; i < ivWeather.length; i++) {
+                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i + 1);
+                    String url = "http://weixin.jirengu.com/images/weather/code/" + obj.getInt("code1") + ".png";
+                    ivWeather[i].setImageBitmap(Common.getInstance().getHttpBitmap(url));
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return sb.toString();
+    };
+
+    private JSONObject resource = null;
+    private void injectRemoteData() {
+        if (this.resource == null) {
+            this.getRemoteData();
+            return;
+        }
+        mHandler.sendEmptyMessage(0);
+    }
+
+    private Thread getRemoteDateThread = null;
+    private boolean getRemoteData() {
+        if (this.getRemoteDateThread != null) {
+            return false;
+        }
+        if (this.resource != null) {
+            String last_update = null;
+            try {
+                last_update = this.resource.getString("last_update");
+                Date date = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(last_update);
+                Date nowDate = new Date(new Date().getTime() - 30 * 60 * 1000);
+                if (date.after(nowDate)) {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        this.getRemoteDateThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d(this.getClass().getSimpleName(), "start " + WEATHER_API_URL);
+                    String res = Common.getInstance().get(WEATHER_API_URL);
+                    if (new JSONObject(res).getString("status").equals("OK")) {
+                        JSONObject object = new JSONObject(res);
+                        resource = object.getJSONArray("weather").getJSONObject(0);
+                        injectRemoteData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    getRemoteDateThread = null;
+                }
+            }
+        });
+        getRemoteDateThread.start();
+        return true;
     }
 
 }
