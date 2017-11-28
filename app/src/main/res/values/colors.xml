@@ -5,4 +5,9 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="backgroud_active">#fff</color>
+    <color name="text_active">#000</color>
+    <color name="backgroud">#000</color>
+    <color name="text">#fff</color>
 </resources>

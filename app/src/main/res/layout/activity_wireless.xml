@@ -5,13 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/root_padding"
+    android:background="@color/backgroud"
     tools:context="com.morelink.mirror7.WirelessActivity">
+
+    <Button
+        android:layout_width="@dimen/action_btn_width"
+        android:layout_height="@dimen/action_btn_height"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/backgroud"
+        android:text="Back"
+        android:onClick="actionBack"
+        ></Button>
 
     <Button
         android:layout_width="@dimen/action_btn_width"
         android:layout_height="@dimen/action_btn_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:background="@color/backgroud"
         android:text="off"
         android:onClick="actionClose"
         tools:ignore="OnClick"></Button>
@@ -27,62 +39,72 @@
             android:id="@+id/control_up"
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
+            android:background="@color/backgroud"
             android:text="UP"
             android:textSize="@dimen/control_fontsize"
             android:layout_centerHorizontal="true"
-            ></Button>
+            android:onClick="actionUp"
+        ></Button>
 
         <Button
             android:id="@+id/control_enter"
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
+            android:background="@color/backgroud"
             android:text="O"
             android:textSize="@dimen/control_fontsize"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/control_up"
-            ></Button>
+            android:onClick="actionEnter"
+        ></Button>
 
         <Button
             android:id="@+id/control_down"
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
+            android:background="@color/backgroud"
             android:text="Down"
             android:textSize="@dimen/control_fontsize"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/control_enter"
-            ></Button>
+            android:onClick="actionDown"
+        ></Button>
 
         <Button
             android:id="@+id/control_left"
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
+            android:background="@color/backgroud"
             android:text="Left"
             android:textSize="@dimen/control_fontsize"
             android:layout_toLeftOf="@id/control_enter"
             android:layout_below="@id/control_up"
+            android:onClick="actionLeft"
         ></Button>
 
         <Button
             android:id="@+id/control_right"
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
+            android:background="@color/backgroud"
             android:text="Right"
             android:textSize="@dimen/control_fontsize"
             android:layout_toRightOf="@id/control_enter"
             android:layout_below="@id/control_up"
-            ></Button>
+            android:onClick="actionRight"
+        ></Button>
     </RelativeLayout>
 
     <!-- Wifi List -->
-    <!-- TODO Display -->
     <LinearLayout
+        android:id="@+id/layout_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingRight="70dp"
         android:paddingBottom="30dp"
         android:orientation="vertical"
-        android:layout_alignParentTop="true"
         android:visibility="invisible"
+        android:layout_alignParentTop="true"
         android:layout_above="@id/control_zoom">
 
         <TextView
@@ -99,11 +121,14 @@
             android:layout_height="match_parent"></ListView>
     </LinearLayout>
 
+    <!-- Wifi Setter -->
     <RelativeLayout
+        android:id="@+id/layout_setter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingRight="70dp"
         android:paddingBottom="30dp"
+        android:paddingTop="60dp"
         android:layout_alignParentTop="true"
         android:layout_above="@id/control_zoom">
 
@@ -121,6 +146,7 @@
                 android:textSize="@dimen/weather_fontsize"
                 android:layout_weight="2"/>
             <TextView
+                android:id="@+id/ssid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Morelink"
@@ -142,6 +168,7 @@
                 android:textSize="@dimen/weather_fontsize"
                 android:layout_weight="2"/>
             <TextView
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="____________"
@@ -157,35 +184,248 @@
             android:layout_alignParentBottom="true">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+            >
+                <Button
+                    android:id="@+id/kb_0_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_0_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+            >
+                <Button
+                    android:id="@+id/kb_1_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_1_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAllCaps="false"
+                ></Button>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                Button*3
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+            >
+                <Button
+                    android:id="@+id/kb_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_2_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_2_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_2_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                    ></Button>
+                <Button
+                    android:id="@+id/kb_2_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_2_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_2_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_2_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAllCaps="false"
+                ></Button>
+                <Button
+                    android:id="@+id/kb_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="←"
+                ></Button>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Delete"></Button>
-                <Button
-                    android:layout_width="match_parent"
+                    android:id="@+id/kb_change"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="space"></Button>
+                ></Button>
                 <Button
-                    android:layout_width="match_parent"
+                    android:id="@+id/kb_space"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Connect"></Button>
+                    android:text="space"></Button>
+                <Button
+                    android:id="@+id/kb_join"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Join"></Button>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+
 </RelativeLayout>

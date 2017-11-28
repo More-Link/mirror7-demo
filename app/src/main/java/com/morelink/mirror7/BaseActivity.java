@@ -28,4 +28,24 @@ public class BaseActivity extends AppCompatActivity {
     public void actionClose(View view) {
         Common.getInstance().goActivity(this, MainActivity.class);
     }
+
+    public void lightUp(View view) {
+
+    }
+
+    public void lightDown(View view) {
+
+    }
+
+    public void lightLevelHigh(View view) {
+
+    }
+
+    public void lightLevelMid(View view) {
+
+    }
+
+    public void lightLevelLow(View view) {
+
+    }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/listitem_connected"
+        android:layout_width="@dimen/item_icon_width"
+        android:layout_height="@dimen/item_height"
+        android:text="Y"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+    />
+    <TextView
+        android:id="@+id/listitem_level"
+        android:layout_width="@dimen/item_icon_width"
+        android:layout_height="@dimen/item_height"
+        android:text="-90"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/listitem_lock"
+        android:layout_width="@dimen/item_icon_width"
+        android:layout_height="@dimen/item_height"
+        android:text="L"
+        android:layout_toLeftOf="@id/listitem_level"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/listitem_ssid"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height"
+        android:text="SSID"
+        android:textAllCaps="false"
+        android:layout_toRightOf="@id/listitem_connected"
+        android:layout_toLeftOf="@id/listitem_lock"
+        android:layout_centerVertical="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        />
+</RelativeLayout>

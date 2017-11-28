@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/root_padding"
+    android:background="@color/backgroud"
     tools:context="com.morelink.mirror7.MainActivity">
 
     <Button
@@ -13,7 +14,9 @@
         android:layout_height="@dimen/action_btn_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:background="@color/backgroud"
         android:text="on"
+        android:textColor="@color/text"
         android:onClick="actionOpen"
     ></Button>
 

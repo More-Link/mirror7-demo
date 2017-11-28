@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroud"
     android:padding="@dimen/root_padding"
     tools:context="com.morelink.mirror7.WeatherActivity">
 
@@ -52,6 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
             />
         </LinearLayout>
 
@@ -93,7 +96,9 @@
                 <ImageView
                     android:id="@+id/fea_1_weather_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="15dp" />
                 <TextView
                     android:id="@+id/fea_1_weather"
                     android:layout_width="match_parent"
@@ -124,7 +129,9 @@
                 <ImageView
                     android:id="@+id/fea_2_weather_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="15dp" />
                 <TextView
                     android:id="@+id/fea_2_weather"
                     android:layout_width="match_parent"
@@ -155,7 +162,9 @@
                 <ImageView
                     android:id="@+id/fea_3_weather_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="15dp" />
                 <TextView
                     android:id="@+id/fea_3_weather"
                     android:layout_width="match_parent"
@@ -213,6 +222,7 @@
         android:layout_height="@dimen/action_btn_height"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
+        android:background="@color/backgroud"
         android:text="wifi"
         android:onClick="actionWireless"
     ></Button>
@@ -222,6 +232,7 @@
         android:layout_height="@dimen/action_btn_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:background="@color/backgroud"
         android:text="off"
         android:onClick="actionClose"
         tools:ignore="OnClick"></Button>
