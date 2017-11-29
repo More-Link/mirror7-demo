@@ -29,6 +29,7 @@ public class WifiUtil {
     }
 
     public void connect(String ssid, String password, WifiCipherType type) {
+        Log.d(WifiUtil.class.getSimpleName(), ssid + " " + password);
         Thread thread = new Thread(new ConnectRunnable(ssid, password, type));
         thread.start();
     }
@@ -103,11 +104,12 @@ public class WifiUtil {
         return config;
     }
 
-    private boolean openWifi() {
+    public boolean openWifi() {
         boolean bRet = true;
         if (!wifiManager.isWifiEnabled()) {
             bRet = wifiManager.setWifiEnabled(true);
         }
+        if (mHandler != null) mHandler.sendEmptyMessage(1);
         return bRet;
     }
 
@@ -169,14 +171,12 @@ public class WifiUtil {
 
                 int netID = wifiManager.addNetwork(wifiConfig);
                 boolean enabled = wifiManager.enableNetwork(netID, true);
-                Log.d(WifiUtil.class.getSimpleName(), "enableNetwork status enable=" + enabled);
                 boolean connected = wifiManager.reconnect();
-                Log.d(WifiUtil.class.getSimpleName(), "enableNetwork connected=" + connected);
-                Log.d(WifiUtil.class.getSimpleName(), "连接成功!");
                 if (mHandler != null) mHandler.sendEmptyMessage(0);
             } catch (Exception e) {
                 // TODO: handle exception
                 Log.d(WifiUtil.class.getSimpleName(), e.getMessage());
+                if (mHandler != null) mHandler.sendEmptyMessage(-1);
                 e.printStackTrace();
             }
         }

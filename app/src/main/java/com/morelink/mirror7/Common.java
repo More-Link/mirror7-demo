@@ -106,7 +106,7 @@ public class Common {
             //连接设置获得数据流
             conn.setDoInput(true);
             //不使用缓存
-            conn.setUseCaches(false);
+            conn.setUseCaches(true);
             //这句可有可无，没有影响
             //conn.connect();
             //得到数据流

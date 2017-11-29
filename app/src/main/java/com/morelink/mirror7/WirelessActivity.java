@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 enum LayoutMode {
@@ -39,7 +40,7 @@ public class WirelessActivity extends BaseActivity {
     private TextView tvSsid = null;
     private TextView tvPwd = null;
 
-    private List<ScanResult> results = null;
+    private List<ScanResult> results = new ArrayList<ScanResult>();
     private ScanResult result = null;
     private int curPosition = 0;
 
@@ -108,18 +109,19 @@ public class WirelessActivity extends BaseActivity {
         }
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiUtil = new WifiUtil(wifiManager);
+        wifiUtil.setHandle(wifiHandler);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        WifiManager wm = null;
-        wm = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-        if (!wm.isWifiEnabled()) {
+        if (!wifiManager.isWifiEnabled()) {
             Toast.makeText(this, "wifi is disabled", Toast.LENGTH_SHORT).show();
+            wifiUtil.openWifi();
         } else {
-            this.results = wm.getScanResults();
+            this.results = wifiManager.getScanResults();
+            this.curPosition = 0;
             mHandler.sendEmptyMessage(0);
         }
     }
@@ -368,6 +370,10 @@ public class WirelessActivity extends BaseActivity {
                     Log.d(WirelessActivity.class.getSimpleName(), "连接成功!");
                     break;
                 case 1:
+                    Log.d(WirelessActivity.class.getSimpleName(), "Wifi开启成功!");
+                    results = wifiManager.getScanResults();
+                    curPosition = 0;
+                    mHandler.sendEmptyMessage(0);
                     break;
             }
         }
@@ -376,7 +382,6 @@ public class WirelessActivity extends BaseActivity {
     public void connectWifi() {
         String ssid = result.SSID;
         String pass = words;
-        wifiUtil.setHandle(wifiHandler);
         wifiUtil.connect(
             ssid, pass.toString(),
             pass.toString().equals("")? WifiUtil.WifiCipherType.WIFICIPHER_NOPASS: WifiUtil.WifiCipherType.WIFICIPHER_WPA
