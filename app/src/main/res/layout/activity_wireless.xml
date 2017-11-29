@@ -103,7 +103,6 @@
         android:paddingRight="70dp"
         android:paddingBottom="30dp"
         android:orientation="vertical"
-        android:visibility="invisible"
         android:layout_alignParentTop="true"
         android:layout_above="@id/control_zoom">
 

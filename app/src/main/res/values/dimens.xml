@@ -10,7 +10,8 @@
 
     <dimen name="action_btn_width">70dp</dimen>
     <dimen name="action_btn_height">70dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="action_light_driver_height">75dp</dimen>
+    <dimen name="action_light_per_height">25dp</dimen>
 
     <dimen name="item_icon_width">40dp</dimen>
     <dimen name="item_height">70dp</dimen>
