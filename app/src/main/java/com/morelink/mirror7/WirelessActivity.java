@@ -347,9 +347,13 @@ public class WirelessActivity extends BaseActivity {
             this.result = this.results.get(this.curPosition);
             this.mode = LayoutMode.SETTER;
             this.words = "";
-            mHandler.sendEmptyMessage(2);
-            mHandler.sendEmptyMessage(4);
-            if (this.result.capabilities.equals("[ESS]")) { connectWifi(); }
+            if (this.result.capabilities.equals("[ESS]")) {
+                notification("正在连接无线...");
+                connectWifi();
+            } else {
+                mHandler.sendEmptyMessage(2);
+                mHandler.sendEmptyMessage(4);
+            }
         } else if (this.mode == LayoutMode.SETTER) {
             Button curBtn = bKeyboard[yPoint][xPoint];
             int id = curBtn.getId();
@@ -381,7 +385,12 @@ public class WirelessActivity extends BaseActivity {
                 this.words += " ";
                 mHandler.sendEmptyMessage(2);
             } else if (id == R.id.kb_join) {
-                connectWifi();
+                if (words.length() < 8) {
+                    notification("至少输入八位密码");
+                } else {
+                    notification("正在连接无线...");
+                    connectWifi();
+                }
             } else {
                 this.words += curBtn.getText();
                 mHandler.sendEmptyMessage(2);
