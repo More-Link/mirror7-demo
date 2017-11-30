@@ -151,13 +151,13 @@ public class WirelessActivity extends BaseActivity {
     }
 
     private Handler mHandler = new Handler() {
-        private ListitemAdapter adapter = null;
+        private WifiitemAdapter adapter = null;
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0: // Init
                     mHandler.sendEmptyMessage(2);
-                    adapter = new ListitemAdapter(WirelessActivity.this, results);
+                    adapter = new WifiitemAdapter(WirelessActivity.this, results);
                     adapter.setContext(WirelessActivity.this);
                     lvWifi.setAdapter(adapter);
                     if (results.size() != 0) {

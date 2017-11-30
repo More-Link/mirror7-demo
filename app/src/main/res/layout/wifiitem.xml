@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
     <TextView
-        android:id="@+id/listitem_connected"
+        android:id="@+id/wifiitem_connected"
         android:layout_width="@dimen/item_icon_width"
         android:layout_height="@dimen/item_height"
         android:text="Y"
@@ -12,7 +12,7 @@
         android:layout_centerVertical="true"
     />
     <TextView
-        android:id="@+id/listitem_level"
+        android:id="@+id/wifiitem_level"
         android:layout_width="@dimen/item_icon_width"
         android:layout_height="@dimen/item_height"
         android:text="-90"
@@ -22,17 +22,17 @@
         android:layout_centerVertical="true"
         />
     <TextView
-        android:id="@+id/listitem_lock"
+        android:id="@+id/wifiitem_lock"
         android:layout_width="@dimen/item_icon_width"
         android:layout_height="@dimen/item_height"
         android:text="@string/icon_lock"
         android:textSize="25sp"
         android:gravity="center"
-        android:layout_toLeftOf="@id/listitem_level"
+        android:layout_toLeftOf="@id/wifiitem_level"
         android:layout_centerVertical="true"
         />
     <TextView
-        android:id="@+id/listitem_ssid"
+        android:id="@+id/wifiitem_ssid"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:text="SSID"
@@ -40,8 +40,8 @@
         android:maxLines="1"
         android:gravity="center_vertical"
         android:textAllCaps="false"
-        android:layout_toRightOf="@id/listitem_connected"
-        android:layout_toLeftOf="@id/listitem_lock"
+        android:layout_toRightOf="@id/wifiitem_connected"
+        android:layout_toLeftOf="@id/wifiitem_lock"
         android:layout_centerVertical="true"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
