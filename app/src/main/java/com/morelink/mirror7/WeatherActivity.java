@@ -156,6 +156,10 @@ public class WeatherActivity extends BaseActivity {
         }
     };
 
+    public void actionMusic(View view) {
+        Common.getInstance().goActivity(this, MusicActivity.class);
+    }
+
     public void actionWireless(View view) {
         Common.getInstance().goActivity(this, WirelessActivity.class);
     }

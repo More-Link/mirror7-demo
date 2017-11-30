@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/backgroud_active"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView android:gravity="center" android:id="@+id/item_mymusic_postion"
+        android:background="@color/backgroud_active"
+        android:layout_height="wrap_content" android:layout_margin="10dp"
+        android:layout_width="wrap_content" android:text="1"
+        android:textColor="@color/text_active" android:textSize="18sp"></TextView>
+
+    <RelativeLayout android:layout_height="wrap_content" android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content">
+
+        <TextView android:id="@+id/item_mymusic_song"
+            android:background="@color/backgroud_active" android:layout_height="wrap_content"
+            android:layout_width="wrap_content" android:text="歌曲名"
+            android:textColor="@color/text_active" android:textSize="20dp"></TextView>
+
+        <TextView android:id="@+id/item_mymusic_singer"
+            android:background="@color/backgroud_active"
+            android:layout_below="@+id/item_mymusic_song"
+            android:layout_height="wrap_content" android:layout_width="wrap_content"
+            android:text="歌手" android:textColor="@color/text_active" android:textSize="15sp"></TextView>
+
+        <TextView android:id="@+id/item_mymusic_duration"
+            android:background="@color/backgroud_active"
+            android:layout_below="@+id/item_mymusic_song"
+            android:layout_height="wrap_content" android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/item_mymusic_singer"
+            android:layout_width="wrap_content" android:text="时间"
+            android:textColor="@color/text_active" android:textSize="15sp"></TextView>
+    </RelativeLayout>
+
+</LinearLayout>

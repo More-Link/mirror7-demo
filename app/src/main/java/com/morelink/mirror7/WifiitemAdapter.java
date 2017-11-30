@@ -1,9 +1,7 @@
 package com.morelink.mirror7;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.wifi.ScanResult;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +16,12 @@ import java.util.List;
  * Created by YY on 2017/11/28.
  */
 
-public class ListitemAdapter extends BaseAdapter {
+public class WifiitemAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater = null;
     private List<ScanResult> list = null;
 
-    public ListitemAdapter(Context context, List<ScanResult> list) {
+    public WifiitemAdapter(Context context, List<ScanResult> list) {
         super();
         this.mInflater = LayoutInflater.from(context);
         this.list = list;
@@ -62,14 +60,14 @@ public class ListitemAdapter extends BaseAdapter {
         TextView tvLock = null;
         TextView tvLevel = null;
         if (this.selectItemPosition == i) {
-            view = mInflater.inflate(R.layout.listitem_active, null);
+            view = mInflater.inflate(R.layout.wifiitem_active, null);
         } else {
-            view = mInflater.inflate(R.layout.listitem, null);
+            view = mInflater.inflate(R.layout.wifiitem, null);
         }
-        tvConnected = view.findViewById(R.id.listitem_connected);
-        tvSsid = view.findViewById(R.id.listitem_ssid);
-        tvLock = view.findViewById(R.id.listitem_lock);
-        tvLevel = view.findViewById(R.id.listitem_level);
+        tvConnected = view.findViewById(R.id.wifiitem_connected);
+        tvSsid = view.findViewById(R.id.wifiitem_ssid);
+        tvLock = view.findViewById(R.id.wifiitem_lock);
+        tvLevel = view.findViewById(R.id.wifiitem_level);
 
         if (context != null) {
             Common.getInstance().setTypeface(context, tvLock);

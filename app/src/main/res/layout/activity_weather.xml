@@ -256,6 +256,7 @@
         android:background="@color/backgroud"
         android:text="@string/icon_music"
         android:textSize="@dimen/action_fontsize"
+        android:onClick="actionMusic"
     />
 
     <RelativeLayout

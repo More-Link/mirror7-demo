@@ -25,7 +25,11 @@
     <string name="icon_signal5">&#xe61a;</string>
     <string name="icon_arrow_left">&#xe660;</string>
     <string name="icon_arrow_down">&#xe600;</string>
-    <string name="icon_music">&#xe696;</string>
     <string name="icon_connection">&#xe609;</string>
     <string name="icon_disconnection">&#xe6ea;</string>
+    <string name="icon_music">&#xe696;</string>
+    <string name="icon_stop">&#xe606;</string>
+    <string name="icon_play">&#xe627;</string>
+    <string name="icon_next">&#xe63b;</string>
+    <string name="icon_prev">&#xe61b;</string>
 </resources>
