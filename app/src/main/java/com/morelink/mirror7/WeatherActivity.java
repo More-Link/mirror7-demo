@@ -89,6 +89,7 @@ public class WeatherActivity extends BaseActivity {
         setTypeface((TextView) findViewById(R.id.action_lightup));
         setTypeface((TextView) findViewById(R.id.action_lightdown));
         setTypeface((TextView) findViewById(R.id.action_wifi));
+        setTypeface((TextView) findViewById(R.id.action_music));
     }
 
     private Handler wifiHandler = new Handler() {
