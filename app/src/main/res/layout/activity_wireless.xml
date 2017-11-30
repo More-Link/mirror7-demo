@@ -8,166 +8,11 @@
     android:background="@color/backgroud"
     tools:context="com.morelink.mirror7.WirelessActivity">
 
-    <Button
-        android:id="@+id/action_back"
-        android:layout_width="@dimen/action_btn_width"
-        android:layout_height="@dimen/action_btn_height"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/backgroud"
-        android:text="@string/icon_back"
-        android:textSize="@dimen/action_fontsize"
-        android:textColor="@color/yellow"
-        android:onClick="actionBack"
-        ></Button>
 
-    <Button
-        android:id="@+id/action_close"
-        android:layout_width="@dimen/action_btn_width"
-        android:layout_height="@dimen/action_btn_height"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/backgroud"
-        android:text="@string/icon_close"
-        android:textSize="@dimen/action_fontsize"
-        android:onClick="actionClose"
-        tools:ignore="OnClick"></Button>
-
-    <!-- Light -->
-    <RelativeLayout
-        android:layout_width="@dimen/action_btn_width"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/action_close"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/action_light_margin_bottom"
-        android:orientation="vertical"
-        android:padding="0dp"
-        >
-        <Button
-            android:id="@+id/action_lightdown"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/action_btn_height"
-            android:layout_alignParentBottom="true"
-            android:background="@color/backgroud"
-            android:text="@string/icon_lightdown"
-            android:textSize="@dimen/action_fontsize"
-            android:onClick="lightDown"
-            tools:ignore="OnClick" />
-        <View
-            android:id="@+id/action_lightdriver"
-            android:layout_width="1dp"
-            android:layout_height="@dimen/action_light_driver_height"
-            android:background="@color/text"
-            android:layout_above="@id/action_lightdown"
-            android:layout_centerHorizontal="true" />
-        <Button
-            android:id="@+id/action_lightup"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/action_btn_height"
-            android:layout_above="@id/action_lightdriver"
-            android:background="@color/backgroud"
-            android:text="@string/icon_lightup"
-            android:textSize="@dimen/action_fontsize"
-            android:onClick="lightUp"
-            tools:ignore="OnClick" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_alignTop="@id/action_lightdriver"
-            android:layout_alignBottom="@id/action_lightdriver"
-            android:onClick="lightLevelMid"
-            tools:ignore="OnClick"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/action_light_per_height"
-            android:background="@android:color/transparent"
-            android:layout_alignTop="@id/action_lightdriver"
-            android:onClick="lightLevelHigh"
-            tools:ignore="OnClick"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/action_light_per_height"
-            android:background="@android:color/transparent"
-            android:layout_alignBottom="@id/action_lightdriver"
-            android:onClick="lightLevelLow"
-            tools:ignore="OnClick"/>
-    </RelativeLayout>
-
-    <!-- Control -->
-    <RelativeLayout
-        android:id="@+id/control_zoom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/control_up"
-            android:layout_width="@dimen/action_btn_width"
-            android:layout_height="@dimen/action_btn_height"
-            android:background="@color/backgroud"
-            android:text="@string/icon_arrow_up"
-            android:textSize="@dimen/control_fontsize"
-            android:textColor="@color/yellow"
-            android:layout_centerHorizontal="true"
-            android:onClick="actionUp"
-        ></Button>
-
-        <Button
-            android:id="@+id/control_enter"
-            android:layout_width="@dimen/action_btn_width"
-            android:layout_height="@dimen/action_btn_height"
-            android:layout_margin="25dp"
-            android:background="@color/backgroud"
-            android:text="@string/icon_open"
-            android:textSize="@dimen/control_fontsize"
-            android:textColor="@color/yellow"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/control_up"
-            android:onClick="actionEnter"
-        ></Button>
-
-        <Button
-            android:id="@+id/control_down"
-            android:layout_width="@dimen/action_btn_width"
-            android:layout_height="@dimen/action_btn_height"
-            android:background="@color/backgroud"
-            android:text="@string/icon_arrow_down"
-            android:textSize="@dimen/control_fontsize"
-            android:textColor="@color/yellow"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/control_enter"
-            android:onClick="actionDown"
-        ></Button>
-
-        <Button
-            android:id="@+id/control_left"
-            android:layout_width="@dimen/action_btn_width"
-            android:layout_height="@dimen/action_btn_height"
-            android:background="@color/backgroud"
-            android:text="@string/icon_arrow_left"
-            android:textSize="@dimen/control_fontsize"
-            android:textColor="@color/yellow"
-            android:layout_toLeftOf="@id/control_enter"
-            android:layout_below="@id/control_up"
-            android:layout_alignBaseline="@id/control_enter"
-            android:onClick="actionLeft"
-        ></Button>
-
-        <Button
-            android:id="@+id/control_right"
-            android:layout_width="@dimen/action_btn_width"
-            android:layout_height="@dimen/action_btn_height"
-            android:background="@color/backgroud"
-            android:text="@string/icon_arrow_right"
-            android:textSize="@dimen/control_fontsize"
-            android:textColor="@color/yellow"
-            android:layout_toRightOf="@id/control_enter"
-            android:layout_below="@id/control_up"
-            android:layout_alignBaseline="@id/control_enter"
-            android:onClick="actionRight"
-        ></Button>
-    </RelativeLayout>
+    <include layout="@layout/content_back"></include>
+    <include layout="@layout/content_close"></include>
+    <include layout="@layout/content_brightness"></include>
+    <include layout="@layout/content_control"></include>
 
     <!-- Wifi List -->
     <LinearLayout
@@ -504,5 +349,8 @@
         </LinearLayout>
     </RelativeLayout>
 
+
+    <include layout="@layout/content_notification"
+        android:visibility="gone"></include>
 
 </RelativeLayout>

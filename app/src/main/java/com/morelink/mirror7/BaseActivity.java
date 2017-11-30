@@ -2,14 +2,19 @@ package com.morelink.mirror7;
 
 import android.content.ContentResolver;
 import android.content.pm.ActivityInfo;
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Arylo on 27/11/17.
@@ -80,5 +85,40 @@ public class BaseActivity extends AppCompatActivity {
 
     public void lightLevelLow(View view) {
         this.setBrightness(76);
+    }
+
+    private RelativeLayout noctificationLayout = null;
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    noctificationLayout = findViewById(R.id.layout_notification);
+                    TextView text = findViewById(R.id.notification_text);
+                    noctificationLayout.setVisibility(View.VISIBLE);
+                    text.setText(msg.obj.toString());
+                    break;
+                case 255:
+                    noctificationLayout.setVisibility(View.GONE);
+                    break;
+            }
+        }
+    };
+
+    public void notification(String text) {
+        notification(text, 2);
+    }
+
+    public void notification(String text, int delay) {
+        Message msg = new Message();
+        msg.what = 0;
+        msg.obj = text;
+        mhandler.sendMessage(msg);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                mhandler.sendEmptyMessage(255);
+            }
+        }, 1000 * delay);
     }
 }

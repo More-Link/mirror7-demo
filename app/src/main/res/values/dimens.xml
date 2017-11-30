@@ -2,6 +2,7 @@
 <resources>
     <dimen name="root_padding">15dp</dimen>
 
+    <dimen name="notification_fontsize">35sp</dimen>
     <dimen name="control_fontsize">50sp</dimen>
 
     <dimen name="weather_fontsize">35sp</dimen>

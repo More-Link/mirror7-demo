@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/action_btn_width"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_above="@id/action_close"
+    android:layout_alignParentRight="true"
+    android:layout_marginBottom="@dimen/action_light_margin_bottom"
+    android:orientation="vertical"
+    android:padding="0dp">
+    <Button
+        android:id="@+id/action_lightdown"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_btn_height"
+        android:layout_alignParentBottom="true"
+        android:text="@string/icon_lightdown"
+        android:textSize="@dimen/action_fontsize"
+        android:background="@color/backgroud"
+        android:onClick="lightDown" />
+    <View
+        android:id="@+id/action_lightdriver"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/action_light_driver_height"
+        android:background="@color/text"
+        android:layout_above="@id/action_lightdown"
+        android:layout_centerHorizontal="true"
+        tools:ignore="OnClick" />
+    <Button
+        android:id="@+id/action_lightup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_btn_height"
+        android:layout_above="@id/action_lightdriver"
+        android:text="@string/icon_lightup"
+        android:textSize="@dimen/action_fontsize"
+        android:background="@color/backgroud"
+        android:onClick="lightUp"
+        tools:ignore="OnClick" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_alignTop="@id/action_lightdriver"
+        android:layout_alignBottom="@id/action_lightdriver"
+        android:onClick="lightLevelMid"
+        tools:ignore="OnClick"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_light_per_height"
+        android:background="@android:color/transparent"
+        android:layout_alignTop="@id/action_lightdriver"
+        android:onClick="lightLevelHigh"
+        tools:ignore="OnClick"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_light_per_height"
+        android:background="@android:color/transparent"
+        android:layout_alignBottom="@id/action_lightdriver"
+        android:onClick="lightLevelLow"
+        tools:ignore="OnClick"/>
+</RelativeLayout>

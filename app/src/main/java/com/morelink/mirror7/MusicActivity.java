@@ -36,15 +36,16 @@ public class MusicActivity extends BaseActivity {
         adapter = new MusicitemAdapter(this, list);
         mListView.setAdapter(adapter);
 
-        setTypeface((TextView) findViewById(R.id.action_back));
-        setTypeface((TextView) findViewById(R.id.action_close));
-        setTypeface((TextView) findViewById(R.id.action_lightup));
-        setTypeface((TextView) findViewById(R.id.action_lightdown));
-        setTypeface((TextView) findViewById(R.id.control_left));
-        setTypeface((TextView) findViewById(R.id.control_right));
-        setTypeface((TextView) findViewById(R.id.control_up));
-        setTypeface((TextView) findViewById(R.id.control_down));
-        setTypeface((TextView) findViewById(R.id.control_enter));
+        int[] ids = {
+            R.id.action_back, R.id.action_close, R.id.action_lightup,
+            R.id.action_lightdown, R.id.control_left, R.id.control_right,
+            R.id.control_up, R.id.control_down, R.id.control_enter
+        };
+        for (int i = 0; i < ids.length; i++) {
+            setTypeface((TextView) findViewById(ids[i]));
+        }
+        ((Button)findViewById(R.id.control_left)).setText(R.string.icon_prev);
+        ((Button)findViewById(R.id.control_right)).setText(R.string.icon_next);
         mHandler.sendEmptyMessage(255);
     }
 
