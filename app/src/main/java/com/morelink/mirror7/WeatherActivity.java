@@ -98,7 +98,14 @@ public class WeatherActivity extends BaseActivity {
             switch (msg.what) {
                 case 0:
                     Log.d("mirror7", "111111111111");
-                    injectRemoteData();
+                    for (int i = 0; i < 5; i++) {
+                        Timer timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            public void run() {
+                                injectRemoteData();
+                            }
+                        }, 1000 * 20 * i);
+                    }
             }
         }
     };
