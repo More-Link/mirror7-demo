@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/control_zoom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <Button
+        android:id="@+id/control_up"
+        android:layout_width="@dimen/action_btn_width"
+        android:layout_height="@dimen/action_btn_height"
+        android:background="@color/backgroud"
+        android:text="@string/icon_arrow_up"
+        android:textSize="@dimen/control_fontsize"
+        android:textColor="@color/yellow"
+        android:layout_centerHorizontal="true"
+        android:onClick="actionUp"
+    ></Button>
+
+    <Button
+        android:id="@+id/control_enter"
+        android:layout_width="@dimen/action_btn_width"
+        android:layout_height="@dimen/action_btn_height"
+        android:layout_margin="25dp"
+        android:background="@color/backgroud"
+        android:text="@string/icon_open"
+        android:textSize="@dimen/control_fontsize"
+        android:textColor="@color/yellow"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/control_up"
+        android:onClick="actionEnter"
+    ></Button>
+
+    <Button
+        android:id="@+id/control_down"
+        android:layout_width="@dimen/action_btn_width"
+        android:layout_height="@dimen/action_btn_height"
+        android:background="@color/backgroud"
+        android:text="@string/icon_arrow_down"
+        android:textSize="@dimen/control_fontsize"
+        android:textColor="@color/yellow"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/control_enter"
+        android:onClick="actionDown"
+    ></Button>
+
+    <Button
+        android:id="@+id/control_left"
+        android:layout_width="@dimen/action_btn_width"
+        android:layout_height="@dimen/action_btn_height"
+        android:background="@color/backgroud"
+        android:text="@string/icon_arrow_left"
+        android:textSize="@dimen/control_fontsize"
+        android:textColor="@color/yellow"
+        android:layout_toLeftOf="@id/control_enter"
+        android:layout_below="@id/control_up"
+        android:layout_alignBaseline="@id/control_enter"
+        android:onClick="actionLeft"
+    ></Button>
+
+    <Button
+        android:id="@+id/control_right"
+        android:layout_width="@dimen/action_btn_width"
+        android:layout_height="@dimen/action_btn_height"
+        android:background="@color/backgroud"
+        android:text="@string/icon_arrow_right"
+        android:textSize="@dimen/control_fontsize"
+        android:textColor="@color/yellow"
+        android:layout_toRightOf="@id/control_enter"
+        android:layout_below="@id/control_up"
+        android:layout_alignBaseline="@id/control_enter"
+        android:onClick="actionRight"
+    ></Button>
+</RelativeLayout>
