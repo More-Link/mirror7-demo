@@ -35,6 +35,11 @@ public class ListitemAdapter extends BaseAdapter {
         });
     }
 
+    private Context context = null;
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     @Override
     public int getCount() {
         return this.list.size();
@@ -66,8 +71,24 @@ public class ListitemAdapter extends BaseAdapter {
         tvLock = view.findViewById(R.id.listitem_lock);
         tvLevel = view.findViewById(R.id.listitem_level);
 
+        if (context != null) {
+            Common.getInstance().setTypeface(context, tvLock);
+            Common.getInstance().setTypeface(context, tvLevel);
+        }
         tvSsid.setText(this.getItem(i).SSID);
         tvLevel.setText(this.getItem(i).level + "");
+        int level = this.getItem(i).level;
+        if (level > -40) {
+            tvLevel.setText(R.string.icon_signal5);
+        } else if (level > -55) {
+            tvLevel.setText(R.string.icon_signal4);
+        } else if (level > -65) {
+            tvLevel.setText(R.string.icon_signal3);
+        } else if (level > -75) {
+            tvLevel.setText(R.string.icon_signal2);
+        } else {
+            tvLevel.setText(R.string.icon_signal1);
+        }
         if ("[ESS]".equals(this.getItem(i).capabilities)) {
             tvLock.setVisibility(View.INVISIBLE);
         } else {

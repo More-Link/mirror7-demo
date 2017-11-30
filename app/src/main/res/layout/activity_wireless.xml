@@ -9,22 +9,27 @@
     tools:context="com.morelink.mirror7.WirelessActivity">
 
     <Button
+        android:id="@+id/action_back"
         android:layout_width="@dimen/action_btn_width"
         android:layout_height="@dimen/action_btn_height"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:background="@color/backgroud"
-        android:text="Back"
+        android:text="@string/icon_back"
+        android:textSize="@dimen/action_fontsize"
+        android:textColor="@color/yellow"
         android:onClick="actionBack"
         ></Button>
 
     <Button
+        android:id="@+id/action_close"
         android:layout_width="@dimen/action_btn_width"
         android:layout_height="@dimen/action_btn_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="@color/backgroud"
-        android:text="off"
+        android:text="@string/icon_close"
+        android:textSize="@dimen/action_fontsize"
         android:onClick="actionClose"
         tools:ignore="OnClick"></Button>
 
@@ -40,8 +45,9 @@
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
             android:background="@color/backgroud"
-            android:text="UP"
+            android:text="@string/icon_arrow_up"
             android:textSize="@dimen/control_fontsize"
+            android:textColor="@color/yellow"
             android:layout_centerHorizontal="true"
             android:onClick="actionUp"
         ></Button>
@@ -50,9 +56,11 @@
             android:id="@+id/control_enter"
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
+            android:layout_margin="25dp"
             android:background="@color/backgroud"
-            android:text="O"
+            android:text="@string/icon_open"
             android:textSize="@dimen/control_fontsize"
+            android:textColor="@color/yellow"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/control_up"
             android:onClick="actionEnter"
@@ -63,8 +71,9 @@
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
             android:background="@color/backgroud"
-            android:text="Down"
+            android:text="@string/icon_arrow_down"
             android:textSize="@dimen/control_fontsize"
+            android:textColor="@color/yellow"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/control_enter"
             android:onClick="actionDown"
@@ -75,10 +84,12 @@
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
             android:background="@color/backgroud"
-            android:text="Left"
+            android:text="@string/icon_arrow_left"
             android:textSize="@dimen/control_fontsize"
+            android:textColor="@color/yellow"
             android:layout_toLeftOf="@id/control_enter"
             android:layout_below="@id/control_up"
+            android:layout_alignBaseline="@id/control_enter"
             android:onClick="actionLeft"
         ></Button>
 
@@ -87,10 +98,12 @@
             android:layout_width="@dimen/action_btn_width"
             android:layout_height="@dimen/action_btn_height"
             android:background="@color/backgroud"
-            android:text="Right"
+            android:text="@string/icon_arrow_right"
             android:textSize="@dimen/control_fontsize"
+            android:textColor="@color/yellow"
             android:layout_toRightOf="@id/control_enter"
             android:layout_below="@id/control_up"
+            android:layout_alignBaseline="@id/control_enter"
             android:onClick="actionRight"
         ></Button>
     </RelativeLayout>
@@ -100,7 +113,7 @@
         android:id="@+id/layout_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="70dp"
+        android:paddingRight="@dimen/content_padding_right"
         android:paddingBottom="30dp"
         android:orientation="vertical"
         android:layout_alignParentTop="true"
@@ -125,9 +138,9 @@
         android:id="@+id/layout_setter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="70dp"
+        android:paddingRight="@dimen/content_padding_right"
         android:paddingBottom="30dp"
-        android:paddingTop="60dp"
+        android:paddingTop="80dp"
         android:layout_alignParentTop="true"
         android:layout_above="@id/control_zoom">
 
@@ -136,11 +149,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:paddingBottom="15dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SSID: "
+                android:text="无线名称: "
                 android:textAlignment="viewEnd"
                 android:textSize="@dimen/weather_fontsize"
                 android:layout_weight="2"/>
@@ -162,7 +176,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pwd: "
+                android:text="无线密码: "
                 android:textAlignment="viewEnd"
                 android:textSize="@dimen/weather_fontsize"
                 android:layout_weight="2"/>
@@ -180,7 +194,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:background="@color/backgroud_active">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -404,7 +419,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+            >
                 <Button
                     android:id="@+id/kb_change"
                     android:layout_width="wrap_content"
@@ -416,15 +432,75 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="space"></Button>
+                    android:text="@string/icon_space"></Button>
                 <Button
                     android:id="@+id/kb_join"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Join"></Button>
+                    android:text="连接"></Button>
             </LinearLayout>
         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/action_btn_width"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/action_close"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/action_light_margin_bottom"
+        android:orientation="vertical"
+        android:padding="0dp"
+        >
+        <Button
+            android:id="@+id/action_lightdown"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_btn_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/backgroud"
+            android:text="@string/icon_lightdown"
+            android:textSize="@dimen/action_fontsize"
+            android:onClick="lightDown"
+            tools:ignore="OnClick" />
+        <View
+            android:id="@+id/action_lightdriver"
+            android:layout_width="1dp"
+            android:layout_height="@dimen/action_light_driver_height"
+            android:background="@color/text"
+            android:layout_above="@id/action_lightdown"
+            android:layout_centerHorizontal="true" />
+        <Button
+            android:id="@+id/action_lightup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_btn_height"
+            android:layout_above="@id/action_lightdriver"
+            android:background="@color/backgroud"
+            android:text="@string/icon_lightup"
+            android:textSize="@dimen/action_fontsize"
+            android:onClick="lightUp"
+            tools:ignore="OnClick" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_alignTop="@id/action_lightdriver"
+            android:layout_alignBottom="@id/action_lightdriver"
+            android:onClick="lightLevelMid"
+            tools:ignore="OnClick"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_light_per_height"
+            android:background="@android:color/transparent"
+            android:layout_alignTop="@id/action_lightdriver"
+            android:onClick="lightLevelHigh"
+            tools:ignore="OnClick"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_light_per_height"
+            android:background="@android:color/transparent"
+            android:layout_alignBottom="@id/action_lightdriver"
+            android:onClick="lightLevelLow"
+            tools:ignore="OnClick"/>
     </RelativeLayout>
 
 </RelativeLayout>

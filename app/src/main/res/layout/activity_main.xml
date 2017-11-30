@@ -10,13 +10,15 @@
     tools:context="com.morelink.mirror7.MainActivity">
 
     <Button
+        android:id="@+id/action_open"
         android:layout_width="@dimen/action_btn_width"
         android:layout_height="@dimen/action_btn_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="@color/backgroud"
-        android:text="on"
+        android:text="@string/icon_open"
         android:textColor="@color/text"
+        android:textSize="@dimen/action_fontsize"
         android:onClick="actionOpen"
     ></Button>
 

@@ -1,14 +1,15 @@
 package com.morelink.mirror7;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.wifi.WifiConfiguration;
+import android.graphics.Typeface;
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -24,14 +25,21 @@ import java.net.URL;
 
 public class Common {
 
-    private static Common common = null;;
+    private static Common common = null;
+    private Typeface iconfont = null;
 
     public static synchronized Common getInstance() {
         if (common == null) {
-
             common = new Common();
         }
         return common;
+    }
+
+    protected void setTypeface(Context that, TextView view) {
+        if (this.iconfont == null) {
+            this.iconfont = Typeface.createFromAsset(that.getAssets(), "iconfont.ttf");
+        }
+        view.setTypeface(iconfont);
     }
 
     private static Class<?> lastactivity = WeatherActivity.class;
@@ -106,7 +114,7 @@ public class Common {
             //连接设置获得数据流
             conn.setDoInput(true);
             //不使用缓存
-            conn.setUseCaches(true);
+            conn.setUseCaches(false);
             //这句可有可无，没有影响
             //conn.connect();
             //得到数据流

@@ -1,8 +1,11 @@
 package com.morelink.mirror7;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +20,8 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class WeatherActivity extends BaseActivity {
 
@@ -73,11 +78,36 @@ public class WeatherActivity extends BaseActivity {
         this.vCurTime = this.findViewById(R.id.cur_time);
         this.vCurTimeHalf = this.findViewById(R.id.cur_time_half);
         this.vCurRoomTemp = this.findViewById(R.id.cur_room_temp);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                timeHandler.sendEmptyMessage(0);
+            }
+        }, 0,1000 * 5);
+
+        setTypeface((TextView) findViewById(R.id.action_close));
+        setTypeface((TextView) findViewById(R.id.action_lightup));
+        setTypeface((TextView) findViewById(R.id.action_lightdown));
+        setTypeface((TextView) findViewById(R.id.action_wifi));
     }
+
+    private Handler wifiHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    Log.d("mirror7", "111111111111");
+                    injectRemoteData();
+            }
+        }
+    };
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        WifiStateChangedBroadcastReceiver.setHandler(wifiHandler);
+
         ConnectivityManager cm = null;
         cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -85,8 +115,18 @@ public class WeatherActivity extends BaseActivity {
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         if (isConnected) {
-            this.injectRemoteData();
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                public void run() {
+                    injectRemoteData();
+                }
+            }, 0,1000 * 60 * 10 /* 10 min */);
         }
+        timeHandler.sendEmptyMessage(0);
+        // TODO Room Temp
+    }
+
+    private void renderTime() {
         String hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "";
         if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 10) {
             hour = "0" + hour;
@@ -95,12 +135,18 @@ public class WeatherActivity extends BaseActivity {
         if (Calendar.getInstance().get(Calendar.MINUTE) < 10) {
             min = "0" + min;
         }
-        this.vCurTime.setText(hour + ":" + min);
-        this.vCurTimeHalf.setText(
+        vCurTime.setText(hour + ":" + min);
+        vCurTimeHalf.setText(
                 Calendar.getInstance().get(Calendar.AM_PM) == 0 ? "AM" : "PM"
         );
-        // TODO Room Temp
     }
+
+    private Handler timeHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            renderTime();
+        }
+    };
 
     public void actionWireless(View view) {
         Common.getInstance().goActivity(this, WirelessActivity.class);
@@ -109,6 +155,9 @@ public class WeatherActivity extends BaseActivity {
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            findViewById(R.id.layout_future).setVisibility(View.VISIBLE);
+            findViewById(R.id.layout_future_divider).setVisibility(View.VISIBLE);
+            findViewById(R.id.cur_temp).setVisibility(View.VISIBLE);
             // Current Date
             try {
                 JSONObject curObj = resource.getJSONArray("future").getJSONObject(0);

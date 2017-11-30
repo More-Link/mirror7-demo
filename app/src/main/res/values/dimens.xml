@@ -2,16 +2,19 @@
 <resources>
     <dimen name="root_padding">15dp</dimen>
 
-    <dimen name="control_fontsize">40sp</dimen>
+    <dimen name="control_fontsize">50sp</dimen>
 
     <dimen name="weather_fontsize">35sp</dimen>
     <dimen name="weather_fontsize_big">60sp</dimen>
     <dimen name="weather_feature_fontsize">16sp</dimen>
 
+    <dimen name="content_padding_right">70dp</dimen>
     <dimen name="action_btn_width">70dp</dimen>
     <dimen name="action_btn_height">70dp</dimen>
-    <dimen name="action_light_driver_height">75dp</dimen>
-    <dimen name="action_light_per_height">25dp</dimen>
+    <dimen name="action_fontsize">40sp</dimen>
+    <dimen name="action_light_driver_height">111dp</dimen>
+    <dimen name="action_light_per_height">37dp</dimen>
+    <dimen name="action_light_margin_bottom">100dp</dimen>
 
     <dimen name="item_icon_width">40dp</dimen>
     <dimen name="item_height">70dp</dimen>

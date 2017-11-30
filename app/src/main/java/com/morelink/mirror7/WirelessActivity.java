@@ -102,9 +102,33 @@ public class WirelessActivity extends BaseActivity {
             { R.id.kb_action, R.id.kb_2_0, R.id.kb_2_1, R.id.kb_2_2, R.id.kb_2_3, R.id.kb_2_4, R.id.kb_2_5, R.id.kb_2_6, R.id.kb_delete},
             { R.id.kb_change, R.id.kb_space, R.id.kb_join}
         };
+
+        setTypeface((TextView) findViewById(R.id.action_back));
+        setTypeface((TextView) findViewById(R.id.action_close));
+        setTypeface((TextView) findViewById(R.id.action_lightup));
+        setTypeface((TextView) findViewById(R.id.action_lightdown));
+        setTypeface((TextView) findViewById(R.id.control_left));
+        setTypeface((TextView) findViewById(R.id.control_right));
+        setTypeface((TextView) findViewById(R.id.control_up));
+        setTypeface((TextView) findViewById(R.id.control_down));
+        setTypeface((TextView) findViewById(R.id.control_enter));
+
         for (int i = 0; i < ids.length; i++) {
             for (int j = 0; j < ids[i].length; j++) {
                 bKeyboard[i][j] = this.findViewById(ids[i][j]);
+                Button btn = bKeyboard[i][j];
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) btn.getLayoutParams();
+                int boardSize = 1;
+                lp.setMargins(j == 0 ? 0 : boardSize, i == 0 ? boardSize : 0, 0,boardSize);
+                if (btn.getId() == R.id.kb_space || btn.getId() == R.id.kb_action) {
+                    int bottom = lp.bottomMargin;
+                    int top = lp.topMargin;
+                    int left = lp.leftMargin;
+                    int right = lp.rightMargin;
+                    lp.setMargins(left, -1, right, bottom);
+                }
+                btn.setLayoutParams(lp);
+                btn.setTextSize(20);
             }
         }
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -134,6 +158,7 @@ public class WirelessActivity extends BaseActivity {
                 case 0: // Init
                     mHandler.sendEmptyMessage(2);
                     adapter = new ListitemAdapter(WirelessActivity.this, results);
+                    adapter.setContext(WirelessActivity.this);
                     lvWifi.setAdapter(adapter);
                     if (results.size() != 0) {
                         curPosition = 0;
@@ -200,7 +225,8 @@ public class WirelessActivity extends BaseActivity {
                         bKeyboard[2][i].setVisibility(View.GONE);
                     }
                     if (isLower || isUpper) {
-                        bKeyboard[2][0].setText("↑");
+                        setTypeface(bKeyboard[2][0]);
+                        bKeyboard[2][0].setText(R.string.icon_upper);
                     } else if (isNumber) {
                         bKeyboard[2][0].setText("#+=");
                     } else if (isSymbol) {
@@ -212,8 +238,8 @@ public class WirelessActivity extends BaseActivity {
                     } else if (isNumber || isSymbol) {
                         bKeyboard[3][0].setText("ABC");
                     }
-                    bKeyboard[3][1].setText("Space");
-                    bKeyboard[3][2].setText("Join");
+                    setTypeface(bKeyboard[3][1]);
+//                    bKeyboard[3][2].setText("Join");
                     break;
             }
         }
@@ -323,6 +349,7 @@ public class WirelessActivity extends BaseActivity {
             this.words = "";
             mHandler.sendEmptyMessage(2);
             mHandler.sendEmptyMessage(4);
+            if (this.result.capabilities.equals("[ESS]")) { connectWifi(); }
         } else if (this.mode == LayoutMode.SETTER) {
             Button curBtn = bKeyboard[yPoint][xPoint];
             int id = curBtn.getId();
@@ -368,6 +395,7 @@ public class WirelessActivity extends BaseActivity {
             switch (msg.what) {
                 case 0:
                     Log.d(WirelessActivity.class.getSimpleName(), "连接成功!");
+                    Common.getInstance().goActivity(WirelessActivity.this, WeatherActivity.class);
                     break;
                 case 1:
                     Log.d(WirelessActivity.class.getSimpleName(), "Wifi开启成功!");

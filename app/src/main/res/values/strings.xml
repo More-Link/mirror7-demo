@@ -5,4 +5,24 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_wireless">WirelessActivity</string>
+
+    <string name="icon_lightdown">&#xe6ed;</string>
+    <string name="icon_upper">&#xe66b;</string>
+    <string name="icon_open">&#xe690;</string>
+    <string name="icon_close">&#xe652;</string>
+    <string name="icon_sure05">&#xe63a;</string>
+    <string name="icon_lightup">&#xe6a8;</string>
+    <string name="icon_lock">&#xe621;</string>
+    <string name="icon_space">&#xe605;</string>
+    <string name="icon_wifi">&#xe626;</string>
+    <string name="icon_back">&#xe641;</string>
+    <string name="icon_arrow_up">&#xe630;</string>
+    <string name="icon_arrow_right">&#xe632;</string>
+    <string name="icon_signal4">&#xe616;</string>
+    <string name="icon_signal3">&#xe617;</string>
+    <string name="icon_signal2">&#xe618;</string>
+    <string name="icon_signal1">&#xe619;</string>
+    <string name="icon_signal5">&#xe61a;</string>
+    <string name="icon_arrow_left">&#xe660;</string>
+    <string name="icon_arrow_down">&#xe600;</string>
 </resources>

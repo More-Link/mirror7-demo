@@ -2,12 +2,14 @@ package com.morelink.mirror7;
 
 import android.content.ContentResolver;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 /**
  * Created by Arylo on 27/11/17.
@@ -31,6 +33,10 @@ public class BaseActivity extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         super.onResume();
+    }
+
+    protected void setTypeface(TextView view) {
+        Common.getInstance().setTypeface(this, view);
     }
 
     public void actionClose(View view) {
