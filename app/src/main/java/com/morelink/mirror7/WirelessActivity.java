@@ -220,6 +220,7 @@ public class WirelessActivity extends BaseActivity {
                     // Lv3
                     for (int i = 0; i < curKeyboard[2].length; i++) {
                         bKeyboard[2][i+1].setText(String.valueOf(curKeyboard[2][i]));
+                        bKeyboard[2][i+1].setVisibility(View.VISIBLE);
                     }
                     for (int i = curKeyboard[2].length + 1; i < bKeyboard[2].length - 1; i++) {
                         bKeyboard[2][i].setVisibility(View.GONE);
