@@ -59,6 +59,7 @@
                 android:layout_weight="1"
                 android:paddingRight="15dp"
                 android:paddingLeft="15dp"
+                android:layout_marginBottom="@dimen/weather_current_margin_bottom"
             />
         </LinearLayout>
 
@@ -69,10 +70,11 @@
             android:layout_height="1dp"
             android:background="@android:color/white"
             android:visibility="invisible"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
         </LinearLayout>
 
         <!-- Future Weather -->
@@ -91,27 +93,29 @@
                     android:id="@+id/fea_1_week"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="Mon"
                     android:textAlignment="center"/>
                 <TextView
                     android:id="@+id/fea_1_temp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="18~23"
                     android:textAlignment="center"/>
                 <ImageView
                     android:id="@+id/fea_1_weather_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingRight="15dp"
-                    android:paddingLeft="15dp" />
+                    android:layout_marginTop="@dimen/weather_future_margin_top"
+                    android:layout_marginBottom="@dimen/weather_future_margin_bottom"
+                    android:paddingRight="@dimen/weather_future_pandding_right"
+                    android:paddingLeft="@dimen/weather_future_pandding_left" />
                 <TextView
                     android:id="@+id/fea_1_weather"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="Cloud"
                     android:textAlignment="center"/>
             </LinearLayout>
@@ -124,27 +128,29 @@
                     android:id="@+id/fea_2_week"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="Mon"
                     android:textAlignment="center"/>
                 <TextView
                     android:id="@+id/fea_2_temp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="18~23"
                     android:textAlignment="center"/>
                 <ImageView
                     android:id="@+id/fea_2_weather_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingRight="15dp"
-                    android:paddingLeft="15dp" />
+                    android:layout_marginTop="@dimen/weather_future_margin_top"
+                    android:layout_marginBottom="@dimen/weather_future_margin_bottom"
+                    android:paddingRight="@dimen/weather_future_pandding_right"
+                    android:paddingLeft="@dimen/weather_future_pandding_left" />
                 <TextView
                     android:id="@+id/fea_2_weather"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="Cloud"
                     android:textAlignment="center"/>
             </LinearLayout>
@@ -157,27 +163,29 @@
                     android:id="@+id/fea_3_week"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="Mon"
                     android:textAlignment="center"/>
                 <TextView
                     android:id="@+id/fea_3_temp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="18~23"
                     android:textAlignment="center"/>
                 <ImageView
                     android:id="@+id/fea_3_weather_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingRight="15dp"
-                    android:paddingLeft="15dp" />
+                    android:layout_marginTop="@dimen/weather_future_margin_top"
+                    android:layout_marginBottom="@dimen/weather_future_margin_bottom"
+                    android:paddingRight="@dimen/weather_future_pandding_right"
+                    android:paddingLeft="@dimen/weather_future_pandding_left" />
                 <TextView
                     android:id="@+id/fea_3_weather"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/weather_feature_fontsize"
+                    android:textSize="@dimen/weather_future_fontsize"
                     android:text="Cloud"
                     android:textAlignment="center"/>
             </LinearLayout>
