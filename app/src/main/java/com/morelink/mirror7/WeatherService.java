@@ -2,6 +2,8 @@ package com.morelink.mirror7;
 
 import android.app.Service;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -21,6 +23,11 @@ public class WeatherService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
     }
 
     private Timer timer = null;
@@ -63,10 +70,18 @@ class WeatherBinder extends Binder {
     public void setHandler (Handler handler) {
         this.pHandler = handler;
     }
+    private ConnectivityManager cm = null;
+    public void setConnectivityManager(ConnectivityManager cm) {
+        this.cm = cm;
+    }
 
     public void downloadWeatherInfo() {
         if (getWeatherThread != null) return;
-        if (last_update_date + (1000 * 60 * 20 /* 20min */) >= System.currentTimeMillis()) return;
+        if (pHandler == null) return;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) return;
+        if (last_update_date + (1000 * 60 * 5 /* 5min */) >= System.currentTimeMillis()) return;
 
         getWeatherThread = new Thread() {
             @Override

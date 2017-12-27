@@ -47,6 +47,9 @@ public class WeatherActivity extends BaseActivity {
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             binder = (WeatherBinder) iBinder;
             binder.setHandler(weatherHandler);
+            if (cm != null) {
+                binder.setConnectivityManager(cm);
+            }
             binder.downloadWeatherInfo();
             if (binder.getWeathers() != null) {
                 Message msg = new Message();
@@ -119,26 +122,22 @@ public class WeatherActivity extends BaseActivity {
     private Handler wifiHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (binder != null) binder.downloadWeatherInfo();
+            if (binder != null) {
+                binder.downloadWeatherInfo();
+            }
         }
     };
 
+    private ConnectivityManager cm = null;
     @Override
     protected void onResume() {
         super.onResume();
 
         WifiStateChangedBroadcastReceiver.setHandler(wifiHandler);
 
-        ConnectivityManager cm = null;
         cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (binder != null) binder.setConnectivityManager(cm);
 
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-
-        if (isConnected) {
-            if (binder != null) binder.downloadWeatherInfo();
-        }
-        timeHandler.sendEmptyMessage(0);
         // TODO Room Temp
     }
 

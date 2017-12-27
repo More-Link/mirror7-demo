@@ -65,6 +65,7 @@ public class BaseActivity extends AppCompatActivity {
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.screenBrightness = (value <= 0 ? -1.0f : value / 255f);
         getWindow().setAttributes(lp);
+        Log.d(this.getClass().getSimpleName(), "Set " + value);
     }
 
     public void lightUp(View view) {

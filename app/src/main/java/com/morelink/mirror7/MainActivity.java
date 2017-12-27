@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(this, WeatherService.class);
         startService(intent);
 
-        Common.getInstance().goActivity(this, WeatherActivity.class);
+//        Common.getInstance().goActivity(this, WeatherActivity.class);
     }
 
     @Override
