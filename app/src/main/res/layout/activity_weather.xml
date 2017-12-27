@@ -55,7 +55,7 @@
             <ImageView
                 android:id="@+id/cur_weather_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="270dp"
                 android:layout_weight="1"
                 android:paddingRight="15dp"
                 android:paddingLeft="15dp"
