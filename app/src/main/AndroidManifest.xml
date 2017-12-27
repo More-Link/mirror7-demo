@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.morelink.mirror7">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -31,7 +31,8 @@
         <activity android:name=".WeatherActivity" />
         <activity android:name=".WirelessActivity" />
         <activity android:name=".MusicActivity" />
-        <receiver android:name=".WifiStateChangedBroadcastReceiver" >
+
+        <receiver android:name=".WifiStateChangedBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
@@ -39,6 +40,11 @@
                 <action android:name="android.net.wifi.SCAN_RESULTS" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".WeatherService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

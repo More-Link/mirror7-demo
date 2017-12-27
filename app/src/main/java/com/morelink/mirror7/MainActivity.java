@@ -18,8 +18,12 @@ public class MainActivity extends BaseActivity {
         WifiUtil wu = new WifiUtil((WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE));
         wu.openWifi();
 
-//        Common.getInstance().goActivity(this, WirelessActivity.class);
         setTypeface((TextView) findViewById(R.id.action_open));
+        // 启动天气服务
+        Intent intent = new Intent(this, WeatherService.class);
+        startService(intent);
+
+        Common.getInstance().goActivity(this, WeatherActivity.class);
     }
 
     @Override

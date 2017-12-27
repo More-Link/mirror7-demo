@@ -1,31 +1,26 @@
 package com.morelink.mirror7;
 
-import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class WeatherActivity extends BaseActivity {
 
-    private String WEATHER_API_URL = "http://weixin.jirengu.com/weather";
     private TextView vCurDate;
     private TextView vCurWeek;
     private TextView vFea1Week;
@@ -39,25 +34,33 @@ public class WeatherActivity extends BaseActivity {
     private TextView vFea2Weather;
     private TextView vFea3Weather;
     private ImageView vCurWeatherImage;
-    private ImageView vFea1WeatherImage;
-    private ImageView vFea2WeatherImage;
-    private ImageView vFea3WeatherImage;
+    private ImageView vFuture1WeatherImage;
+    private ImageView vFuture2WeatherImage;
+    private ImageView vFuture3WeatherImage;
     private TextView vCurTime;
     private TextView vCurTimeHalf;
     private TextView vCurRoomTemp;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads().detectDiskWrites().detectNetwork()
-                .penaltyLog().build());
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-                .penaltyLog().penaltyDeath().build());
-        super.onCreate(savedInstanceState);
+    private WeatherBinder binder;
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            binder = (WeatherBinder) iBinder;
+            binder.setHandler(weatherHandler);
+            binder.downloadWeatherInfo();
+            if (binder.getWeathers() != null) {
+                Message msg = new Message();
+                msg.obj = binder.getWeathers();
+                weatherHandler.sendMessage(msg);
+            }
+        }
 
-        setContentView(R.layout.activity_weather);
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+        }
+    };
 
+    private void bindViewByIds() {
         this.vCurDate = this.findViewById(R.id.cur_date);
         this.vCurWeek = this.findViewById(R.id.cur_week);
         this.vFea1Week = this.findViewById(R.id.fea_1_week);
@@ -71,20 +74,15 @@ public class WeatherActivity extends BaseActivity {
         this.vFea2Weather = this.findViewById(R.id.fea_2_weather);
         this.vFea3Weather = this.findViewById(R.id.fea_3_weather);
         this.vCurWeatherImage = this.findViewById(R.id.cur_weather_image);
-        this.vFea1WeatherImage = this.findViewById(R.id.fea_1_weather_image);
-        this.vFea2WeatherImage = this.findViewById(R.id.fea_2_weather_image);
-        this.vFea3WeatherImage = this.findViewById(R.id.fea_3_weather_image);
+        this.vFuture1WeatherImage = this.findViewById(R.id.fea_1_weather_image);
+        this.vFuture2WeatherImage = this.findViewById(R.id.fea_2_weather_image);
+        this.vFuture3WeatherImage = this.findViewById(R.id.fea_3_weather_image);
 
         this.vCurTime = this.findViewById(R.id.cur_time);
         this.vCurTimeHalf = this.findViewById(R.id.cur_time_half);
         this.vCurRoomTemp = this.findViewById(R.id.cur_room_temp);
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                timeHandler.sendEmptyMessage(0);
-            }
-        }, 0,1000 * 5);
-
+    }
+    private void bindFontTypeByIds() {
         setTypeface((TextView) findViewById(R.id.action_close));
         setTypeface((TextView) findViewById(R.id.action_lightup));
         setTypeface((TextView) findViewById(R.id.action_lightdown));
@@ -92,21 +90,36 @@ public class WeatherActivity extends BaseActivity {
         setTypeface((TextView) findViewById(R.id.action_music));
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectDiskReads().detectDiskWrites().detectNetwork()
+                .penaltyLog().build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
+                .penaltyLog().penaltyDeath().build());
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_weather);
+        this.bindViewByIds();
+        this.bindFontTypeByIds();
+
+        // 定时刷新时间
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                timeHandler.sendEmptyMessage(0);
+            }
+        }, 0,1000 * 5);
+
+        Intent bindIntent = new Intent(this, WeatherService.class);
+        bindService(bindIntent, connection, BIND_AUTO_CREATE);
+    }
+
     private Handler wifiHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    Log.d("mirror7", "111111111111");
-                    for (int i = 0; i < 5; i++) {
-                        Timer timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            public void run() {
-                                injectRemoteData();
-                            }
-                        }, 1000 * 20 * i);
-                    }
-            }
+            if (binder != null) binder.downloadWeatherInfo();
         }
     };
 
@@ -123,17 +136,15 @@ public class WeatherActivity extends BaseActivity {
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         if (isConnected) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                public void run() {
-                    injectRemoteData();
-                }
-            }, 0,1000 * 60 * 10 /* 10 min */);
+            if (binder != null) binder.downloadWeatherInfo();
         }
         timeHandler.sendEmptyMessage(0);
         // TODO Room Temp
     }
 
+    /**
+     * 渲染时间
+     */
     private void renderTime() {
         String hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "";
         if (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) < 10) {
@@ -156,119 +167,58 @@ public class WeatherActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 跳转到音乐页
+     * @param view
+     */
     public void actionMusic(View view) {
         Common.getInstance().goActivity(this, MusicActivity.class);
     }
 
+    /**
+     * 跳转到Wireless 设置页
+     * @param view
+     */
     public void actionWireless(View view) {
         Common.getInstance().goActivity(this, WirelessActivity.class);
     }
 
-    private Handler mHandler = new Handler() {
+    private Handler weatherHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            WeatherBean bean = (WeatherBean) msg.obj;
+            OneDayWeatherBean[] beans = { bean.current, bean.futures[0], bean.futures[1], bean.futures[2] };
+
             findViewById(R.id.layout_future).setVisibility(View.VISIBLE);
             findViewById(R.id.layout_future_divider).setVisibility(View.VISIBLE);
             findViewById(R.id.cur_temp).setVisibility(View.VISIBLE);
             // Current Date
-            try {
-                JSONObject curObj = resource.getJSONArray("future").getJSONObject(0);
-                vCurDate.setText(curObj.getString("date"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            // Weeks
+            vCurDate.setText(beans[0].date);
             TextView[] tvsWeek = { vCurWeek, vFea1Week, vFea2Week, vFea3Week };
-            try {
-                for (int i = 0; i < tvsWeek.length; i++) {
-                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i);
-                    tvsWeek[i].setText(obj.getString("day"));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            // Temps
             TextView[] tvsTemp = { vCurTemp, vFea1Temp, vFea2Temp, vFea3Temp };
-            try {
-                for (int i = 0; i < tvsTemp.length; i++) {
-                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i);
-                    String str = obj.getString("low") + "~" + obj.getString("high") + "℃";
-                    tvsTemp[i].setText(str);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            // Weather
             TextView[] tvsWeather = { vFea1Weather, vFea2Weather, vFea3Weather };
-            try {
-                for (int i = 0; i < tvsWeather.length; i++) {
-                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i + 1);
-                    String str = obj.getString("text").replaceAll("\\/.+", "");
-                    tvsWeather[i].setText(str);
+            ImageView[] ivWeather = {
+                vCurWeatherImage, vFuture1WeatherImage,
+                vFuture2WeatherImage, vFuture3WeatherImage
+            };
+            for (int i = 0; i < beans.length; i++) {
+                // Weeks
+                tvsWeek[i].setText(beans[i].day);
+                // Temps
+                if (beans[i].low == null || beans[i].high == null) {
+                    tvsTemp[i].setText(beans[i].temp);
+                } else {
+                    tvsTemp[i].setText(beans[i].low + "~" + beans[i].high + "℃");
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+                // Weather
+                ivWeather[i].setImageBitmap(Common.getInstance().getHttpBitmap(beans[i].imageUrl));
             }
-            ImageView[] ivWeather = { vCurWeatherImage, vFea1WeatherImage, vFea2WeatherImage, vFea3WeatherImage };
-            try {
-                for (int i = 0; i < ivWeather.length; i++) {
-                    JSONObject obj = resource.getJSONArray("future").getJSONObject(i + 1);
-                    String url = "http://weixin.jirengu.com/images/weather/code/" + obj.getInt("code1") + ".png";
-                    ivWeather[i].setImageBitmap(Common.getInstance().getHttpBitmap(url));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            for (int i = 0; i < tvsWeather.length; i++) {
+                // Weather
+                tvsWeather[i].setText(beans[i + 1].weather);
             }
         }
     };
 
-    private JSONObject resource = null;
-    private void injectRemoteData() {
-        if (this.resource == null) {
-            this.getRemoteData();
-            return;
-        }
-        mHandler.sendEmptyMessage(0);
-    }
-
-    private Thread getRemoteDateThread = null;
-    private boolean getRemoteData() {
-        if (this.getRemoteDateThread != null) {
-            return false;
-        }
-        if (this.resource != null) {
-            String last_update = null;
-            try {
-                last_update = this.resource.getString("last_update");
-                Date date = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ssZ").parse(last_update);
-                Date nowDate = new Date(new Date().getTime() - 30 * 60 * 1000);
-                if (date.after(nowDate)) {
-                    return false;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        this.getRemoteDateThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.d(this.getClass().getSimpleName(), "start " + WEATHER_API_URL);
-                    String res = Common.getInstance().get(WEATHER_API_URL);
-                    if (new JSONObject(res).getString("status").equals("OK")) {
-                        JSONObject object = new JSONObject(res);
-                        resource = object.getJSONArray("weather").getJSONObject(0);
-                        injectRemoteData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    getRemoteDateThread = null;
-                }
-            }
-        });
-        getRemoteDateThread.start();
-        return true;
-    }
 
 }

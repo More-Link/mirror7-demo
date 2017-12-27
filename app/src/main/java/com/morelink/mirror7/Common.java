@@ -66,6 +66,7 @@ public class Common {
 
     public String get(String path) throws Exception {
         String response = null;
+        Log.d(this.getClass().getSimpleName(), "Get URL: " + path);
         try {
             URL url = new URL(path);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -75,7 +76,7 @@ public class Common {
             InputStream in = new BufferedInputStream(conn.getInputStream());
             response = convertStreamToString(in);
         } catch (Exception e) {
-            Log.e(WeatherActivity.class.getSimpleName(), "Exception: " + e.getMessage());
+            Log.e(this.getClass().getSimpleName(), "Exception: " + e.getMessage());
         } finally {
             return response;
         }
